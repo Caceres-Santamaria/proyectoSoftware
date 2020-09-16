@@ -1,0 +1,104 @@
+@font-face {
+    font-family: 'gothiceregular';
+    src: url('../font/gothice_-webfont.woff2') format('woff2'), url('../font/gothice_-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+html{
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    font-family: sans-serif, Helvetica, sans-serif;
+    font-size: 1rem;
+    background-image: url(../imagenes/f4.gif);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+.contenedor{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+.contenedor__main {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(1fr,4);
+    grid-template-areas: "bienvenida" "mensaje" "rol";
+    width: 40%;
+    height: 90%;
+    align-content: center;
+    justify-content: center;
+    background-color:rgb(255, 255, 255) ;
+    border-radius: 1rem;
+}
+
+.contenedor__main-bienvenida{
+    grid-area: bienvenida;
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    margin-top: 1rem;
+    color:rgb(0, 0, 0);
+    font-family: 'gothiceregular';
+    font-size: 4rem;
+}
+.contenedor__main-mensaje{
+    grid-area: mensaje;
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    margin-top: 5rem;
+    color:rgb(0, 0, 0);
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+.contenedor__main-rol{
+    grid-area: rol;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto;
+    grid-template-areas: "cliente administrador";
+    align-content: center;
+    justify-content: center;
+    font-family: 'gothiceregular';
+    font-size:1.3rem;
+    margin-top: 2rem;
+}
+
+.cliente{
+    grid-area: cliente;
+    display: grid;
+    text-align:center;
+}
+.rol a{
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    height: 3.7rem;
+    width: 12rem;
+    background: rgba(230, 133, 6, 0.8);
+    margin-top: 1rem;
+    text-align:center;
+    border-radius: 15px;
+    align-content: center;
+    justify-content: center;
+    line-height: 3.7rem;
+    
+}
+.administrador{
+    grid-area: administrador;
+    display: grid;
+    margin-left: 1.5rem;
+    align-content: center;
+}
+
+.rol a:hover{
+    background: rgba(230, 133, 6, 0.6);
+    box-shadow: 2px 2px 2px 1px rgb(139, 139, 139);
+}
