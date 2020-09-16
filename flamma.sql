@@ -78,6 +78,7 @@ create table pedido(
     nro_seguimiento character varying(30),
     estado varchar(10) not null,
     descuento numeric not null,
+    fecha date not null,
     FOREIGN KEY (departamento) REFERENCES departamento (id_departamento),
     FOREIGN KEY (ciudad) REFERENCES ciudad (id_ciudad),
     check (estado='no enviado' or estado='enviado')
@@ -86,9 +87,10 @@ create table pedido(
 create table detalle_pedido(
 	numero_pedido smallint not null,
     referencia character varying(5) not null,
+    id_talla smallint not null,
     cantidad smallint not null,
     precio_unidad numeric not null,
-    primary key(numero_pedido,referencia),
+    primary key(numero_pedido,referencia,id_talla),
     FOREIGN KEY (numero_pedido) REFERENCES pedido (numero),
     FOREIGN KEY (referencia) REFERENCES producto (referencia)
 );
@@ -1339,8 +1341,8 @@ INSERT INTO imagen_producto(producto,nombre) VALUES
 ('T0011','pantNegro.jpg'),
 
 ('T0012','aretes.jpg'),
-('T0013','Collar.jpg'),
-('T0013','Collar2.jpg'),
+('T0013','collar.jpg'),
+('T0013','collar2.jpg'),
 ('T0014','glassesMorada.jpg'),
 ('T0015','glassesNaranja.jpg'),
 ('T0016','glassesNegra.jpg'),
@@ -1443,3 +1445,5 @@ INSERT INTO talla_producto(referencia,id_talla,existencia) VALUES
 ('T0027',4,10),
 ('T0028',4,10),
 ('T0029',4,10);
+
+

@@ -48,7 +48,7 @@ $sub = $_REQUEST['sub']
                                 <input type="text" name="direccion" id="direccion">
                             </div>
                             <div class="elemento">
-                                <label for="direccion">Especificación</label>
+                                <label for="especificacion">Especificación</label>
                                 <input type="text" name="especificacion" id="especificacion" placeholder="piso/apartamento">
                             </div>
                             <div class="elemento">
@@ -67,13 +67,6 @@ $sub = $_REQUEST['sub']
                                 <label for="ciudad">Ciudad</label>
                                 <select id="ciudad" name="ciudad">
                                     <option value='0'>---</option>
-                                    <?php/*
-                                    $list = $objMetodo->ListaCuidades();
-                                    echo "<option value='0'>---</option>";
-                                    foreach ($list as $row) {
-                                        echo '<option value=' . $row[0] . '>' . $row[2] . '</option>';
-                                    }*/
-                                    ?>
                                 </select>
                             </div>
                         </div>
