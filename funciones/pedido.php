@@ -2,33 +2,33 @@
     include '../funciones/Metodos.php';
     session_start();
     $objMetodo = new Metodos();
-    $usuario = $_SESSION['usuario'];
     extract($_POST);
-    $ciu = $_POST['ciudad'];
-    $idDomi = $objMetodo->idDomi($ciu);
-    
-    $lista = $objMetodo->getUsuario($_SESSION['usuario']);
-    foreach ($lista as $row){
-        $codigo = $row[3];
+    $cont = $objMetodo->contCupon(''.$cupon);
+    if($cont == 0)
+    {
+        $descuento = 0;
+    }
+    else
+    {
+        $valor = $objMetodo->getDescuento($cupon);
+        $descuento = $subtotal*$valor;
     }
     $cant = $objMetodo->CuentaPedidos() + 1;
-    $objMetodo->InsertPedido($cant, $direccion, $descripcion,$idDomi,$codigo,$persona,$telefono);
+    $objMetodo->InsertPedido($cant,$persona,$departamento,$ciudad,$direccion,$especificacion,$telefono,$descuento);
     foreach ($_SESSION['CARRITO'] as $indice=>$producto){
         $cantidad = $producto['CANTIDAD'];
         $codP = $producto['ID'];
-        $sql="select valor_venta from producto where id_producto='$codP'";
+        $talla = $producto['TALLA'];
+        $sql="select costo from producto where referencia='$codP'";
         $list=$objMetodo->Consulta($sql);
         foreach($list as $row)
         {
             $valor=$row[0];
         }
-        $objMetodo->InsertDetalle($cant,$codP,$cantidad,$valor);
-        $sql ="update producto set existencia = existencia - $cantidad where id_producto = '$codP'";
+        $objMetodo->InsertDetalle($cant, $codP, $talla, $cantidad, $valor);
+        $sql ="update talla_producto set existencia = existencia - $cantidad where referencia = '$codP' and id_talla = '$talla'";
         $objMetodo->Actualizar($sql);
     }
-    $sql = "insert into factura values ((select count(numero_factura) from factura)+1,current_date,$cant)";
-    $objMetodo->Actualizar($sql);
     unset($_SESSION['CARRITO']);
-    header("location: ../funciones/creaTienda.php");
-
+    header("location: ../vistas/inicio.php");
 ?>

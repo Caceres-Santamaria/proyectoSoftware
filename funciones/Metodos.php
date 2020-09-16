@@ -263,13 +263,6 @@ class Metodos
         }
         return $costo;
     }
-
-
-
-
-
-
-
     public function CuentaPedidos()
     {
         $cnx = new conexionDB();
@@ -283,20 +276,45 @@ class Metodos
         }
         return $cant;
     }
-    public function InsertPedido($cant, $direccion, $descripcion, $idDomi, $codigo, $persona, $telefono)
+    public function InsertPedido($cant,$persona,$departamento,$ciudad,$direccion,$especificacion,$telefono,$descuento)
     {
         $cnx = new conexionDB();
         $conn = $cnx->getConexion();
-        $query = "insert into pedido values('$cant','$direccion',now(),'$descripcion','$idDomi','$codigo','Sin seguimiento','3','01','$persona','$telefono',current_date)";
+        $query = "insert into pedido values('$cant','$persona','$departamento','$ciudad','$direccion','$especificacion','$telefono','Sin seguimiento','no enviado','$descuento',current_date)";
         $conn->query($query);
     }
-    public function InsertDetalle($idP, $codP, $cant, $valor)
+    public function InsertDetalle($idP, $codP, $talla, $cant, $valor)
     {
         $cnx = new conexionDB();
         $conn = $cnx->getConexion();
-        $query = "insert into pedido_producto values ('$idP','$codP','$cant','$valor')";
+        $query = "insert into detalle_pedido values ('$idP','$codP','$talla','$cant','$valor')";
         $conn->query($query);
     }
+    public function Actualizar($sql)
+    {
+        $cnx = new conexionDB();
+        $conn = $cnx->getConexion();
+        $query = $sql;
+        $conn->query($query);
+    }
+    public function Consulta($sql)
+    {
+        $cnx = new conexionDB();
+        $conn = $cnx->getConexion();
+        $query = $sql;
+        $list = [];
+        foreach ($conn->query($query) as $row) {
+            $list[] = $row;
+        }
+        return $list;
+    }
+
+
+
+
+
+
+
     public function NumeroPedidos($codigo)
     {
         $cnx = new conexionDB();
@@ -352,24 +370,6 @@ class Metodos
         $cnx = new conexionDB();
         $conn = $cnx->getConexion();
         $query = "select * from pedido_producto where id_pedido = " . $idPedido;
-        $list = [];
-        foreach ($conn->query($query) as $row) {
-            $list[] = $row;
-        }
-        return $list;
-    }
-    public function Actualizar($sql)
-    {
-        $cnx = new conexionDB();
-        $conn = $cnx->getConexion();
-        $query = $sql;
-        $conn->query($query);
-    }
-    public function Consulta($sql)
-    {
-        $cnx = new conexionDB();
-        $conn = $cnx->getConexion();
-        $query = $sql;
         $list = [];
         foreach ($conn->query($query) as $row) {
             $list[] = $row;

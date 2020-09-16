@@ -48,7 +48,7 @@ $sub = $_REQUEST['sub']
                                 <input type="text" name="direccion" id="direccion">
                             </div>
                             <div class="elemento">
-                                <label for="direccion">Especificación</label>
+                                <label for="especificacion">Especificación</label>
                                 <input type="text" name="especificacion" id="especificacion" placeholder="piso/apartamento">
                             </div>
                             <div class="elemento">
@@ -67,13 +67,6 @@ $sub = $_REQUEST['sub']
                                 <label for="ciudad">Ciudad</label>
                                 <select id="ciudad" name="ciudad">
                                     <option value='0'>---</option>
-                                    <?php/*
-                                    $list = $objMetodo->ListaCuidades();
-                                    echo "<option value='0'>---</option>";
-                                    foreach ($list as $row) {
-                                        echo '<option value=' . $row[0] . '>' . $row[2] . '</option>';
-                                    }*/
-                                    ?>
                                 </select>
                             </div>
                         </div>
@@ -89,7 +82,7 @@ $sub = $_REQUEST['sub']
                             <h3 id="resumen">Resumen Pedido( <?php echo (empty($_SESSION['CARRITO'])) ? 0 : count($_SESSION['CARRITO']); ?> )</h3>
                             <div class="elemento">
                                 <label for="subtotal">SubTotal</label>
-                                <input type="hidden" value="<?php echo $sub; ?>" id="subtotal">
+                                <input type="hidden" value="<?php echo $sub; ?>" id="subtotal" name="subtotal">
                                 <p id="subtotal">$ <?php echo number_format($sub, 1); ?></p>
                             </div>
                             <div class="elemento">
