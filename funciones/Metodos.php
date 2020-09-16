@@ -14,7 +14,6 @@ class Metodos
         }
         return $list;
     }
-
     public function categoria()
     {
         $cnx = new conexionDB();
@@ -26,7 +25,6 @@ class Metodos
         }
         return $list;
     }
-
     public function coleccion()
     {
         $cnx = new conexionDB();
@@ -42,7 +40,7 @@ class Metodos
     {
         $cnx = new conexionDB();
         $conn = $cnx->getConexion();
-        $query = "select b.referencia,b.nombre,(select sum(existencia) from talla_producto as a where a.referencia=b.referencia) as existencia,b.descripcion,b.costo,b.categoria,b.coleccion from producto as b where b.categoria =".$codigo." order by b.nombre asc;";
+        $query = "select b.referencia,b.nombre,(select sum(existencia) from talla_producto as a where a.referencia=b.referencia) as existencia,b.descripcion,b.costo,b.categoria,b.coleccion from producto as b where b.categoria =" . $codigo . " order by b.nombre asc;";
         $list = [];
         foreach ($conn->query($query) as $row) {
             $list[] = $row;
@@ -53,14 +51,13 @@ class Metodos
     {
         $cnx = new conexionDB();
         $conn = $cnx->getConexion();
-        $query = "select b.referencia,b.nombre,(select sum(existencia) from talla_producto as a where a.referencia=b.referencia) as existencia,b.descripcion,b.costo,b.categoria,b.coleccion from producto as b where b.coleccion =".$codigo." order by b.nombre asc;";
+        $query = "select b.referencia,b.nombre,(select sum(existencia) from talla_producto as a where a.referencia=b.referencia) as existencia,b.descripcion,b.costo,b.categoria,b.coleccion from producto as b where b.coleccion =" . $codigo . " order by b.nombre asc;";
         $list = [];
         foreach ($conn->query($query) as $row) {
             $list[] = $row;
         }
         return $list;
     }
-
     public function getNombreClasificacion($codigo)
     {
         $cnx = new conexionDB();
@@ -69,8 +66,7 @@ class Metodos
         foreach ($conn->query($query) as $row) {
             $list[] = $row;
         }
-        foreach($list as $row)
-        {
+        foreach ($list as $row) {
             $nombre = $row[0];
         }
         return $nombre;
@@ -84,8 +80,7 @@ class Metodos
         foreach ($conn->query($query) as $row) {
             $list[] = $row;
         }
-        foreach($list as $row)
-        {
+        foreach ($list as $row) {
             $count = $row[0];
         }
         return $count;
@@ -99,8 +94,7 @@ class Metodos
         foreach ($conn->query($query) as $row) {
             $list[] = $row;
         }
-        foreach($list as $row)
-        {
+        foreach ($list as $row) {
             $count = $row[0];
         }
         return $count;
@@ -116,7 +110,6 @@ class Metodos
         }
         return $list;
     }
-
     public function getImagenes($prod)
     {
         $cnx = new conexionDB();
@@ -128,52 +121,81 @@ class Metodos
         }
         return $list;
     }
-
-    public function getImagenProducto($cod,$array)
+    public function getImagenProducto($cod, $array)
     {
         $images = array();
-        foreach($array as $producto)
-        {
-            if($cod == $producto['ID'])
-            {
+        foreach ($array as $producto) {
+            if ($cod == $producto['ID']) {
                 $images = $producto['IMAGES'];
             }
         }
         return $images;
     }
-
-
-
-
-
-
     public function ListarProductosCod($cod)
     {
         $cnx = new conexionDB();
         $conn = $cnx->getConexion();
-        $query = "select nombre,descripcion,valor_venta,imagen,segunda_imagen,existencia from producto where id_producto ='" . $cod . "'";
+        $query = "select nombre,descripcion,costo from producto where referencia ='" . $cod . "'";
         $list = [];
         foreach ($conn->query($query) as $row) {
             $list[] = $row;
         }
         return $list;
     }
-    public function getProducto($cod)
+
+    public function getTallas($cod)
     {
         $cnx = new conexionDB();
         $conn = $cnx->getConexion();
-        $query = "select * from producto where id_producto = '" . $cod . "'";
+        $query = "select t.id_talla,t.nombre,tp.existencia from talla as t inner join talla_producto as tp on t.id_talla = tp.id_talla where tp.referencia = '$cod'";
         $list = [];
         foreach ($conn->query($query) as $row) {
             $list[] = $row;
         }
         return $list;
+    }
+
+    public function getProducto($cod)
+    {
+        $cnx = new conexionDB();
+        $conn = $cnx->getConexion();
+        $query = "select * from producto where referencia = '" . $cod . "'";
+        $list = [];
+        foreach ($conn->query($query) as $row) {
+            $list[] = $row;
+        }
+        return $list;
+    }
+    public function getTalla($cod)
+    {
+        $cnx = new conexionDB();
+        $conn = $cnx->getConexion();
+        $query = "select nombre from talla where id_talla = ". $cod ."";
+        $list = [];
+        foreach ($conn->query($query) as $row) {
+            $list[] = $row;
+        }
+        foreach ($list as $row) {
+            $talla = $row[0];
+        }
+        return $talla;
     }
     public function getCiudad($codc)
     {
         $cnx = new conexionDB();
         $conn = $cnx->getConexion();
-        $query = "select * from ciudad where id_ciudad = '" . $codc . "'";
+        $query = "select * from ciudad where id_ciudad = " . $codc . "";
+        $list = [];
+        foreach ($conn->query($query) as $row) {
+            $list[] = $row;
+        }
+        return $list;
+    }
+    public function getCiudadDepartamento($codc)
+    {
+        $cnx = new conexionDB();
+        $conn = $cnx->getConexion();
+        $query = "select * from ciudad where id_departamento = " . $codc . " order by nombre";
         $list = [];
         foreach ($conn->query($query) as $row) {
             $list[] = $row;
@@ -184,7 +206,18 @@ class Metodos
     {
         $cnx = new conexionDB();
         $conn = $cnx->getConexion();
-        $query = "select * from ciudad order by id_ciudad";
+        $query = "select * from ciudad order by nombre";
+        $list = [];
+        foreach ($conn->query($query) as $row) {
+            $list[] = $row;
+        }
+        return $list;
+    }
+    public function ListaDepartamentos()
+    {
+        $cnx = new conexionDB();
+        $conn = $cnx->getConexion();
+        $query = "select * from departamento order by nombre";
         $list = [];
         foreach ($conn->query($query) as $row) {
             $list[] = $row;
@@ -195,7 +228,7 @@ class Metodos
     {
         $cnx = new conexionDB();
         $conn = $cnx->getConexion();
-        $query = "select costo from domicilio where id_ciudad = '$ciu'";
+        $query = "select costo from ciudad where id_ciudad = '$ciu'";
         foreach ($conn->query($query) as $row) {
             $list[] = $row;
         }
@@ -204,19 +237,39 @@ class Metodos
         }
         return $costo;
     }
-    public function idDomi($ciud)
+    public function contCupon($cup)
     {
         $cnx = new conexionDB();
         $conn = $cnx->getConexion();
-        $query = "select id_domicilio from domicilio where id_ciudad = '" . $ciud . "'";
+        $query = "select count(*) from cupon where id_cupon = '$cup'";
         foreach ($conn->query($query) as $row) {
             $list[] = $row;
         }
         foreach ($list as $row) {
-            $id_domi = $row[0];
+            $costo = $row[0];
         }
-        return $id_domi;
+        return $costo;
     }
+    public function getDescuento($cup)
+    {
+        $cnx = new conexionDB();
+        $conn = $cnx->getConexion();
+        $query = "select valor from cupon where id_cupon = '$cup'";
+        foreach ($conn->query($query) as $row) {
+            $list[] = $row;
+        }
+        foreach ($list as $row) {
+            $costo = $row[0];
+        }
+        return $costo;
+    }
+
+
+
+
+
+
+
     public function CuentaPedidos()
     {
         $cnx = new conexionDB();
@@ -312,30 +365,6 @@ class Metodos
         $query = $sql;
         $conn->query($query);
     }
-    public function getEmpresa($id)
-    {
-        $cnx = new conexionDB();
-        $conn = $cnx->getConexion();
-        $query = "select nombre from empresa_envio where id_empresa_envio = '" . $id . "'";
-        foreach ($conn->query($query) as $row) {
-            $list[] = $row;
-        }
-        foreach ($list as $row) {
-            $nombre = $row[0];
-        }
-        return $nombre;
-    }
-    public function ConProveedor()
-    {
-        $cnx = new conexionDB();
-        $conn = $cnx->getConexion();
-        $query = "select a.identificacion, a.nombre,a.email, a.direccion, a.telefono,(select nombre from ciudad where id_ciudad = a.id_ciudad) as ciu, a.pagina_web, a.nro_cuenta, a.entidad_bancaria from proveedor as a";
-        $list = [];
-        foreach ($conn->query($query) as $row) {
-            $list[] = $row;
-        }
-        return $list;
-    }
     public function Consulta($sql)
     {
         $cnx = new conexionDB();
@@ -374,17 +403,6 @@ class Metodos
         $cnx = new conexionDB();
         $conn = $cnx->getConexion();
         $query = "select a.id_producto, a.nombre,a.existencia, a.descripcion, a.valor_venta, a.imagen,(select nombre from subcategoria_producto where id_subcategoria = a.id_subcategoria) as sub,(select nombre from tipo_producto where id_tipo_producto = a.id_tipo_producto) as tipo from producto as a where a.id_tipo_producto = '" . $cat . "'";
-        $list = [];
-        foreach ($conn->query($query) as $row) {
-            $list[] = $row;
-        }
-        return $list;
-    }
-    public function ConEmpresaEnvio()
-    {
-        $cnx = new conexionDB();
-        $conn = $cnx->getConexion();
-        $query = "select a.id_empresa_envio, a.nombre,a.direccion, a.telefono,a.email, a.pagina_web from empresa_envio as a";
         $list = [];
         foreach ($conn->query($query) as $row) {
             $list[] = $row;

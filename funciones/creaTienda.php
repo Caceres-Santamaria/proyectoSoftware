@@ -64,5 +64,5 @@ $_SESSION['hoodies'] = $hoodies;
 $_SESSION['nuevos'] = $nuevos;
 $_SESSION['basicos'] = $basicos;
 */
-//header("location: ../vistas/flamma.php");
+header("location: ../vistas/flamma.php");
 ?>

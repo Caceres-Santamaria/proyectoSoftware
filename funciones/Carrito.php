@@ -8,10 +8,12 @@ switch($accion)
 case 'Agregar':
     $cantidad = $_REQUEST['cnt'];
     $codigo = $_REQUEST['cod'];
+    $talla = $_REQUEST['talla'];
     if(!isset($_SESSION["CARRITO"]))
     {
         $producto = array(
             'ID'=>$codigo,
+            'TALLA'=>$talla,
             'CANTIDAD'=>$cantidad
         );
         $_SESSION['CARRITO'][0]=$producto;
@@ -19,12 +21,14 @@ case 'Agregar':
     else{
         $cont = false;
         foreach ($_SESSION['CARRITO'] as $indice=>$producto){
-            if($producto['ID'] == $codigo){
+            if($producto['ID'] == $codigo && $producto['TALLA']==$talla){
                 $produc = $_SESSION['CARRITO'][$indice];
                 $id = $produc['ID'];
+                $talla1 = $produc['TALLA'];
                 $can = $produc['CANTIDAD'] + $cantidad;
                 $_SESSION['CARRITO'][$indice] = array(
                     'ID'=>$id,
+                    'TALLA'=>$talla1,
                     'CANTIDAD'=>$can
                 );
                 $cont = true;
@@ -34,6 +38,7 @@ case 'Agregar':
         $numero = count($_SESSION['CARRITO']);
         $producto = array(
             'ID'=>$codigo,
+            'TALLA'=>$talla,
             'CANTIDAD'=>$cantidad
         );
         $_SESSION['CARRITO'][$numero] = $producto;
@@ -44,8 +49,9 @@ case 'Agregar':
 
 case 'Eliminar':
     $codigo = $_REQUEST['cod'];
+    $talla = $_REQUEST['talla'];
     foreach ($_SESSION['CARRITO'] as $indice=>$producto){
-        if($producto['ID'] == $codigo){
+        if($producto['ID'] == $codigo && $producto['TALLA']==$talla){
             unset($_SESSION['CARRITO'][$indice]);
             header("location: ../vistas/MuestraCarrito.php");
         }

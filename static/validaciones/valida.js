@@ -7,9 +7,10 @@ function validar_texto(evento) {
         return false;
     }
 }
+
 function validar_textopersona(evento) {
     var key = window.Event ? evento.which : evento.keyCode;
-    if (((key >= 97 && key <= 122) || (key >= 65 && key <= 90)) ||( key == 255 || key == 32)) {
+    if (((key >= 97 && key <= 122) || (key >= 65 && key <= 90)) || (key == 255 || key == 32)) {
         return true;
     } else {
 
@@ -48,7 +49,7 @@ function validar_longitud10(nom) {
     } else {
         title = document.getElementById(nom).getAttribute('title');
         document.getElementById(nom).style.borderColor = "red";
-        alert( title + " demasiado larg@");
+        alert(title + " demasiado larg@");
         return false;
     }
 }
@@ -160,6 +161,7 @@ function validar_fecha() {
         document.getElementById("fecha").style.borderColor = "gray";
     return true;
 }
+
 function validar_fechafin() {
     var caja = document.getElementById("fechafin");
     var date = document.getElementById("fechafin").value;
@@ -254,16 +256,14 @@ function regarga1() {
     location.href = "../vistasA/modificarProducto.php?categoria=" + valor + "&id=2";
 }
 
-function maximacantidad(cantidad){
-    var valor=document.getElementById('cantidadB').value;
-    if(valor>cantidad)
-    {
+function maximacantidad(cantidad) {
+    var valor = document.getElementById('cantidadB').value;
+    if (valor > cantidad) {
         document.getElementById('cantidadB').value = cantidad;
-        
     }
 
 }
 
-function eliminaCiu(id){
-    location.href = "../funciones/eliminaCiudad.php?id="+id;
+function eliminaCiu(id) {
+    location.href = "../funciones/eliminaCiudad.php?id=" + id;
 }

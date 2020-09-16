@@ -2,7 +2,6 @@
 include '../funciones/Metodos.php';
 session_start();
 $objMetodo = new Metodos();
-$usuario = $_SESSION['usuario'];
 $sub = $_REQUEST['sub']
 ?>
 <!DOCTYPE html>
@@ -15,15 +14,19 @@ $sub = $_REQUEST['sub']
     <link rel="stylesheet" href="../static/estilos/general.css">
     <script src="../static/validaciones/jquery-2.2.4.min.js"></script>
     <script src="../static/slider/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../static/estilos/normalize.css">
+    <link rel="stylesheet" href="../static/estilos/glider.min.css">
+    <link rel="stylesheet" href="../static/estilos/home.css">
+    <script src="https://kit.fontawesome.com/cd1bad9cef.js" crossorigin="anonymous"></script>
+    <script src="../static/validaciones/glider.min.js"></script>
+    <script src="../static/validaciones/app.js"></script>
 </head>
 
 <body>
     <div class="contenedor">
-        <div class="row justify-content-md-center">
-            <?php
-            include '../componentes/menu.php';
-            ?>
-        </div>
+        <?php
+        include '../componentes/menu.php';
+        ?>
         <section class=" text-center padin-section">
             <div class="row justify-content-md-center align-items-center ">
                 <div class="col-sm-12 align-self-center ">
@@ -45,10 +48,14 @@ $sub = $_REQUEST['sub']
                                 <input type="text" name="direccion" id="direccion">
                             </div>
                             <div class="elemento">
-                                <label for="ciudad">Ciudad</label>
-                                <select id="ciudad" name="ciudad">
+                                <label for="direccion">Especificación</label>
+                                <input type="text" name="especificacion" id="especificacion" placeholder="piso/apartamento">
+                            </div>
+                            <div class="elemento">
+                                <label for="departamento">Departamento</label>
+                                <select id="departamento" name="departamento">
                                     <?php
-                                    $list = $objMetodo->ListaCuidades();
+                                    $list = $objMetodo->ListaDepartamentos();
                                     echo "<option value='0'>---</option>";
                                     foreach ($list as $row) {
                                         echo '<option value=' . $row[0] . '>' . $row[1] . '</option>';
@@ -56,12 +63,25 @@ $sub = $_REQUEST['sub']
                                     ?>
                                 </select>
                             </div>
+                            <div class="elemento">
+                                <label for="ciudad">Ciudad</label>
+                                <select id="ciudad" name="ciudad">
+                                    <option value='0'>---</option>
+                                    <?php/*
+                                    $list = $objMetodo->ListaCuidades();
+                                    echo "<option value='0'>---</option>";
+                                    foreach ($list as $row) {
+                                        echo '<option value=' . $row[0] . '>' . $row[2] . '</option>';
+                                    }*/
+                                    ?>
+                                </select>
+                            </div>
                         </div>
                         <div class="txtb">
                             <img class="img" src="../static/icons/icons/description.png" width="30" height="30">
                             <div class="elemento">
-                                <label id="ldescripcion" for="descripcion">Descripción</label>
-                                <textarea name="descripcion" id="descripcion"></textarea>
+                                <label id="lcupon" for="cupon">Cupón</label>
+                                <input type="text" name="cupon" id="cupon"></input>
                             </div>
                         </div>
                         <div class="txtb">
@@ -70,7 +90,11 @@ $sub = $_REQUEST['sub']
                             <div class="elemento">
                                 <label for="subtotal">SubTotal</label>
                                 <input type="hidden" value="<?php echo $sub; ?>" id="subtotal">
-                                <p id="subtotal">$ <?php echo number_format($sub, 2); ?></p>
+                                <p id="subtotal">$ <?php echo number_format($sub, 1); ?></p>
+                            </div>
+                            <div class="elemento">
+                                <label for="descuento">Descuento</label>
+                                <p id="descuento">$ 0</p>
                             </div>
                             <div class="elemento">
                                 <label for="CostoE">Costo Envío</label>
@@ -97,6 +121,11 @@ $sub = $_REQUEST['sub']
         $(document).on("ready", function() {
             enviarDatos();
             enviarTotal();
+            enviarCupon();
+            cambiarCupon();
+            llenarCiudad();
+            cupon();
+            document.getElementById("ciudad").disabled = true;
         });
 
         function enviarDatos() {
@@ -115,15 +144,16 @@ $sub = $_REQUEST['sub']
                 });
             });
         }
-
         function enviarTotal() {
             $("#ciudad").on("click", function(e) {
                 e.preventDefault();
                 var ciudad = document.getElementById('ciudad').value;
                 var subtotal = document.getElementById('subtotal').value;
+                var cupon = document.getElementById('cupon').value;
                 var parametros = {
                     "codigo": ciudad,
-                    "subtotal": subtotal
+                    "subtotal": subtotal,
+                    "cupon":cupon
                 };
                 $.ajax({
                     "method": "POST",
@@ -131,6 +161,83 @@ $sub = $_REQUEST['sub']
                     "data": parametros
                 }).done(function(info) {
                     $("#total").html(info);
+                });
+            });
+        }
+        function enviarCupon() {
+            $("#cupon").on("blur", function(e) {
+                e.preventDefault();
+                var ciudad = document.getElementById('ciudad').value;
+                var subtotal = document.getElementById('subtotal').value;
+                var cupon = document.getElementById('cupon').value;
+                var parametros = {
+                    "codigo": ciudad,
+                    "subtotal": subtotal,
+                    "cupon":cupon
+                };
+                $.ajax({
+                    "method": "POST",
+                    "url": "../funciones/costoEnvio.php?id=2",
+                    "data": parametros
+                }).done(function(info) {
+                    $("#total").html(info);
+                });
+            });
+        }
+        function cambiarCupon() {
+            $("#cupon").on("blur", function(e) {
+                e.preventDefault();
+                var cupon = document.getElementById('cupon').value;
+                var subtotal = document.getElementById('subtotal').value;
+                var parametros = {
+                    "cupon":cupon,
+                    "subtotal": subtotal
+                };
+                $.ajax({
+                    "method": "POST",
+                    "url": "../funciones/costoEnvio.php?id=3",
+                    "data": parametros
+                }).done(function(info) {
+                    $("#descuento").html(info);
+                });
+            });
+        }
+        function llenarCiudad() {
+            $("#departamento").on("change", function(e) {
+                e.preventDefault();
+                var departamento = document.getElementById('departamento').value;
+                var parametros = {
+                    "departamento": departamento
+                };
+                $.ajax({
+                    "method": "POST",
+                    "url": "../funciones/costoEnvio.php?id=4",
+                    "data": parametros
+                }).done(function(info) {
+                    $("#ciudad").html(info);
+                    if(departamento=='0')
+                    {
+                        document.getElementById("ciudad").disabled = true;
+                    }
+                    else{
+                        document.getElementById("ciudad").disabled = false;
+                    }
+                });
+            });
+        }
+        function cupon() {
+            $("#cupon").on("blur", function(e) {
+                e.preventDefault();
+                var cupon = document.getElementById('cupon').value;
+                var parametros = {
+                    "cupon":cupon
+                };
+                $.ajax({
+                    "method": "POST",
+                    "url": "../funciones/costoEnvio.php?id=5",
+                    "data": parametros
+                }).done(function(info) {
+                    cupon = document.getElementById('cupon').value = info;
                 });
             });
         }

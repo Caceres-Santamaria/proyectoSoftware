@@ -1,6 +1,5 @@
 
 <script>
-    
     function carrito(){
         location.href = "MuestraCarrito.php";
     }

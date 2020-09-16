@@ -3,6 +3,21 @@
 include "../funciones/Metodos.php";
 session_start();
 $objMetodo = new Metodos();
+
+if(!isset($_SESSION['imagenes']))
+{
+    $images = array();
+    $productos = $objMetodo->getProductos();
+    foreach($productos as $row)
+    {
+        $imagenes = $objMetodo->getImagenes($row[0]);
+        array_push($images,array(
+            'ID'=>$row[0],
+            'IMAGES'=>$imagenes
+        ));
+    }
+    $_SESSION['imagenes'] = $images;
+}
 ?>
 
 <head>
@@ -43,11 +58,12 @@ $objMetodo = new Metodos();
                 $total = 0;
             ?>
                 <div class="table-responsive">
-                    <table class="table table-hover table-bordered">
+                    <table class="table table-hover table-bordered" style="width: 100%;">
                         <thead>
                             <tr class="carrito-cabecera">
                                 <th scope="col" class="text-center">Producto</th>
                                 <th scope="col" class="text-center">Imagen</th>
+                                <th scope="col" class="text-center">Talla</th>
                                 <th scope="col" class="text-center">Cantidad</th>
                                 <th scope="col" class="text-center">Precio</th>
                                 <th scope="col" class="text-center">Total</th>
@@ -60,20 +76,22 @@ $objMetodo = new Metodos();
                                 $listaP = $objMetodo->getProducto($producto['ID']);
                                 foreach ($listaP as $row) {
                                     $nombre = $row[1];
-                                    $imagen = $row[5];
-                                    $precio = $row[4];
+                                    $precio = $row[2];
                                 }
+                                $images = $objMetodo->getImagenProducto(''.$producto['ID'].'',$_SESSION['imagenes']);
                             ?>
                                 <tr>
                                     <td class="text-center"><?php echo strtoupper($nombre) ?></td>
-                                    <td class="text-center"><img src="../static/imagenes/productos/<?php echo $imagen; ?>" width="70px" height="70px"></td>
+                                    <td class="text-center"><img src="../static/imagenes/productos/<?php echo $images[0]; ?>" width="70px" height="70px"></td>
+                                    <td class="text-center"><?php echo $objMetodo->getTalla($producto['TALLA']) ?></td>
                                     <td class="text-center cCantidad"><?php echo $producto['CANTIDAD']; ?></td>
-                                    <td class="text-center"><?php echo $precio; ?></td>
-                                    <td class="text-center"><?php echo number_format($precio * $producto['CANTIDAD'], 2); ?></td>
+                                    <td class="text-center"><?php echo number_format($precio,1); ?></td>
+                                    <td class="text-center"><?php echo number_format($precio * $producto['CANTIDAD'], 1); ?></td>
                                     <td class="text-center">
                                         <form action="" method="post">
-                                            <input type="hidden" name="codigo" id="codigo" value="<?php echo $producto['ID'] ?>">
-                                            <button class="btn btn-danger" type="button" name="btnAction" id="btnAction" value="Eliminar" onclick="enviarCA()">Eliminar</button>
+                                            <input type="hidden" name="codigo<?php echo $producto['ID'];?>" id="codigo<?php echo $producto['ID'];?>" value="<?php echo $producto['ID'] ?>">
+                                            <input type="hidden" name="talla<?php echo $producto['ID'];?>" id="talla<?php echo $producto['ID'];?>" value="<?php echo $producto['TALLA'] ?>">
+                                            <button class="btn btn-danger" type="button" name="btnAction" id="btnAction" value="Eliminar" onclick="enviarCA('<?php echo $producto['ID'] ?>')">Eliminar</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -82,11 +100,11 @@ $objMetodo = new Metodos();
                             }
                             ?>
                             <tr>
-                                <td colspan="4" align="right">
+                                <td colspan="5" align="right">
                                     <h3>Total</h3>
                                 </td>
                                 <td align="right">
-                                    <h3><?php echo number_format($total, 2) ?></h3>
+                                    <h3><?php echo number_format($total, 1) ?></h3>
                                 </td>
                                 <td></td>
                             </tr>
@@ -117,10 +135,11 @@ $objMetodo = new Metodos();
         ?>
     </div>
     <script>
-        function enviarCA() {
-            var codigo = document.getElementById('codigo').value;
+        function enviarCA(producto) {
+            var codigo = document.getElementById('codigo'+producto).value;
             var accion = document.getElementById('btnAction').value;
-            location.href = "../funciones/Carrito.php?cod=" + codigo + "&acc=" + accion;
+            var talla = document.getElementById('talla'+producto).value;
+            location.href = "../funciones/Carrito.php?cod=" + codigo + "&acc=" + accion + "&talla=" + talla;
         }
     </script>
 </body>
