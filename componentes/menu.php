@@ -4,28 +4,20 @@
     }
 </script>
 <header class="header">
-    <div class="menu-movil">
-        <button class="menu-boton">
-            <i class="fas fa-bars"></i>
-        </button>
-    </div>
+    
     <div class="logo-flamma">
         <a href="#home" class="logo">
             <h1>flamma</h1>
         </a>
     </div>
     <div class="iconos">
-        <div class="barra-busqueda">
-            <input type="text" placeholder="Search">
-            <button class="search"><i class="fas fa-search"></i></button>
-        </div>
-        <button class="usuario"><i class="fas fa-user"></i></button>
-        <!-- <button class="carrito"><i class="fas fa-shopping-cart"></i></button> -->
-
         <button class="carrito" type="button" onclick="carrito()">
-            <i class="fas fa-shopping-cart"></i>(<?php
-                                                    echo (empty($_SESSION['CARRITO'])) ? 0 : count($_SESSION['CARRITO']); ?>)
+        <i class="fas fa-shopping-cart"></i>
         </button>
+
+        <button class="usuario"><a href="../funciones/CerrarSesion.php"><i class="fas fa-sign-out-alt"></i></a>
+        </button>
+
     </div>
     <nav class="menu">
         <ul class="menu-list">

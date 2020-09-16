@@ -89,7 +89,7 @@ $sub = $_REQUEST['sub']
                             <h3 id="resumen">Resumen Pedido( <?php echo (empty($_SESSION['CARRITO'])) ? 0 : count($_SESSION['CARRITO']); ?> )</h3>
                             <div class="elemento">
                                 <label for="subtotal">SubTotal</label>
-                                <input type="hidden" value="<?php echo $sub; ?>" id="subtotal">
+                                <input type="hidden" value="<?php echo $sub; ?>" id="subtotal" name="subtotal">
                                 <p id="subtotal">$ <?php echo number_format($sub, 1); ?></p>
                             </div>
                             <div class="elemento">

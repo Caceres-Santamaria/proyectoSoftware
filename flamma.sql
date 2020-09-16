@@ -1359,9 +1359,9 @@ INSERT INTO imagen_producto(producto,nombre) VALUES
 
 ('T0026','hoodieAzul.jpg'),
 ('T0026','hoodieAzul2.jpg'),
-('T0027','hodieGris.jpg'),
-('T0028','hodieNegro.jpg'),
-('T0029','hodieRosa.jpg');
+('T0027','hoodieGris.jpg'),
+('T0028','hoodieNegro.jpg'),
+('T0029','hoodieRosa.jpg');
 
 
 INSERT INTO talla_producto(referencia,id_talla,existencia) VALUES

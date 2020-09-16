@@ -15,6 +15,11 @@
                     <h1>flamma</h1>
                 </a>
             </div>
+            <div class="iconos">
+                <button class="usuario"><a href="../funciones/CerrarSesion.php"><i class="fas fa-sign-out-alt"></i></a>
+                </button>
+            </div>
+
             <nav class="menu">
                 <ul class="menu-list">
                     <li class="list-item active"><a href="inicioA.php" class="home"><i class="fas fa-home"></i><span>HOME</span></a></li>
