@@ -88,8 +88,8 @@
     .iconos {
         grid-area: iconos;
         display: flex;
-        align-items: center;
-        justify-content: end;
+        align-content: flex-end !important;
+        justify-content: right !important;
     }
     
     .iconos button {
@@ -101,6 +101,10 @@
         border-radius: 6.25em;
         width: 2.2em;
         height: 2.2em;
+        align-content: flex-end !important;
+        justify-content: right !important;
+        justify-items: right !important;
+        align-items: flex-end !important;
     }
     
     .iconos button:hover {
