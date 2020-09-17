@@ -241,10 +241,14 @@ function modifica(id, pagina, cod) {
 }
 
 function modificaT(id, talla) {
-    var id = "" + id + talla + "";
-    console.log(id);
-    var cantidad = document.getElementById(id).value;
+    var ids = "" + id + talla + "";
+    var cantidad = document.getElementById(ids).value;
     location.href = "../funciones/actualizar.php?elemento=stock&referencia=" + id + "&talla=" + talla + "&cantidad=" + cantidad;
+
+}
+
+function modificaIMG(id) {
+    location.href = "./imagenesProducto.php?id=" + id;
 
 }
 

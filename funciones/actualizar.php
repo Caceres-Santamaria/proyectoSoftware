@@ -30,16 +30,30 @@ switch($id)
         header("location:../VistasA/coleccion.php");
     break;
     case 'producto':
-        $sql="insert into producto values ('$referencia','$nombre',$costo,'$descripcion',$categoria,$coleccion)";
+        $sql="update producto set nombre='$nombre', costo=$costo,descripcion='$descripcion',categoria=$categoria,coleccion=$coleccion where referencia = '$referencia'";
+        //echo '<br>'.$sql;
         $obj->Actualizar($sql);
-        header("location: ../VistasA/agregarProducto.php");
+        header("location: ../VistasA/modificarProducto.php");
+    break;
+    case 'stock':
+        $referencia=$_REQUEST['referencia'];
+        $talla=$_REQUEST['talla'];
+        $cantidad=$_REQUEST['cantidad'];
+        $sql="update talla_producto set existencia=$cantidad where referencia = '$referencia' and id_talla=$talla";
+        //echo '<br>'.$sql;
+        $obj->Actualizar($sql);
+        header("location: ../VistasA/stock.php");
     break;
     case 'talla':
-        $sql = 'select max(id_talla)+1 from talla';
-        $valor = $obj->Consulta($sql);
-        $valor = $valor[0][0];
-        $sql="insert into talla values ($valor,'$talla')";
+        $sql="update talla set nombre='$talla' where id_talla = $idT";
+        //echo '<br>'.$sql;
         $obj->Actualizar($sql);
         header("location: ../VistasA/tallaProducto.php");
+    break;
+    case 'pedido':
+        $sql="update pedido set nro_seguimiento='$nroseg',estado='$estado' where numero = $numero";
+        //echo '<br>'.$sql;
+        $obj->Actualizar($sql);
+        header("location: ../VistasA/pedidos.php");
     break;
 }

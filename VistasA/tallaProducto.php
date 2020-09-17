@@ -42,7 +42,7 @@ session_start();
                             Nombre talla:*
                         </td>
                         <td>
-                            <input type="text" name="talla" id="talla" title="Nombre del talla"  required placeholder="Nombre del cupón" />
+                            <input type="text" name="talla" id="talla" title="Nombre del talla"  required placeholder="Nombre de la talla" />
                         </td>
                     </tr>
                     <tr>
