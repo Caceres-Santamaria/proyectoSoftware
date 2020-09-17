@@ -27,7 +27,7 @@ session_start();
         include '../componentes/menuA.php';
         ?>
         <section class="padin-section">
-            <table class="table table-bordered tabla-proveedor table-responsive">
+            <table class="table table-bordered tabla-proveedor table-responsive tabla-scroll">
                 <caption>
                     <h2>Pedidos no enviados</h2>
                 </caption>

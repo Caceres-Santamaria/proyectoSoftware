@@ -28,7 +28,7 @@ $cons = new Metodos();
         include '../componentes/menuA.php';
         ?>
         <section class="padin-section">
-            <table class="table table-bordered table-responsive tabla-proveedor">
+            <table class="table table-bordered tabla-proveedor tabla-busqueda">
                 <caption>Buscar Por:</caption>
                 <tr>
                     <td>Categoría</td>
@@ -59,7 +59,7 @@ $cons = new Metodos();
                     </td>
                 </tr>
             </table>
-            <table class="table table-bordered table-responsive tabla-proveedor">
+            <table class="table table-bordered table-responsive tabla-proveedor tabla-scroll">
                 <caption>
                     <h2>Listado de productos</h2>
                 </caption>

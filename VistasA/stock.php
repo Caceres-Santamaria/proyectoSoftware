@@ -43,7 +43,7 @@ $cons = new Metodos();
                 </tr>
             </table>
             <br><br>
-            <table class="table table-bordered table-responsive tabla-proveedor">
+            <table class="table table-bordered table-responsive tabla-proveedor tabla-scroll">
                 <caption>
                     <h2>Stock de los productos</h2>
                 </caption>
