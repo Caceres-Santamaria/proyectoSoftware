@@ -388,6 +388,30 @@ class Metodos
         }
         return $list;
     }
+    public function imagen($ref)
+    {
+        $cnx = new conexionDB();
+        $conn = $cnx->getConexion();
+        $query = "select referencia,nombre from producto where referencia='$ref' order by referencia asc";
+        //"select a.id_pedido,a.direccion, a.hora,a.descripcion, (select costo from domicilio where a.id_domicilio=id_domicilio) as domi,(select primer_nombre ||' '||primer_apellido from cliente where a.id_cliente=identificacion) as cliente, a.nro_seguimiento, (select nombre from empresa_envio where a.id_empresa_envio=id_empresa_envio) as empresa_envio, (select nombre from estado_pedido where a.id_estado=id_estado) as estado,a.persona,a.telefono,a.fecha from pedido as a where a.id_estado = '01'";
+        $list = [];
+        foreach ($conn->query($query) as $row) {
+            $list[] = $row;
+        }
+        return $list;
+    }
+    public function imagen2()
+    {
+        $cnx = new conexionDB();
+        $conn = $cnx->getConexion();
+        $query = "select referencia,nombre from producto as p order by referencia asc";
+        //"select a.id_pedido,a.direccion, a.hora,a.descripcion, (select costo from domicilio where a.id_domicilio=id_domicilio) as domi,(select primer_nombre ||' '||primer_apellido from cliente where a.id_cliente=identificacion) as cliente, a.nro_seguimiento, (select nombre from empresa_envio where a.id_empresa_envio=id_empresa_envio) as empresa_envio, (select nombre from estado_pedido where a.id_estado=id_estado) as estado,a.persona,a.telefono,a.fecha from pedido as a where a.id_estado = '01'";
+        $list = [];
+        foreach ($conn->query($query) as $row) {
+            $list[] = $row;
+        }
+        return $list;
+    }
 
 
 
