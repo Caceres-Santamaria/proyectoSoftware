@@ -248,12 +248,12 @@ function retro(pagina) {
 
 function regarga() {
     var valor = document.getElementById('tipo').value;
-    location.href = "../vistasA/modificarProducto.php?categoria=" + valor + "&id=1";
+    location.href = "../VistasA/modificarProducto.php?categoria=" + valor + "&id=1";
 }
 
 function regarga1() {
     var valor = document.getElementById('subtipo').value;
-    location.href = "../vistasA/modificarProducto.php?categoria=" + valor + "&id=2";
+    location.href = "../VistasA/modificarProducto.php?categoria=" + valor + "&id=2";
 }
 
 function maximacantidad(cantidad) {

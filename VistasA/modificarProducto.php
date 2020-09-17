@@ -31,11 +31,11 @@ $cons = new Metodos();
             <table class="table table-bordered table-responsive tabla-proveedor">
                 <caption>Buscar Por:</caption>
                 <tr>
-                    <td>Tipo Producto</td>
+                    <td>Categoría</td>
                     <td>
                         <select name="tipo" id="tipo" onblur="regarga()">
                             <?php
-                            $sql = "select * from tipo_producto";
+                            $sql = "select a.id_clasficacion,a.nombre from clasificacion as a inner join categoria as b on a.id_clasficacion = b.id_categoria";
                             $list = $cons->Consulta($sql);
                             foreach ($list as $row) {
                                 echo "<option value='$row[0]'>$row[1]</option>";
@@ -45,11 +45,11 @@ $cons = new Metodos();
                     </td>
                 </tr>
                 <tr>
-                    <td>Sub Categoria</td>
+                    <td>Colección</td>
                     <td>
                         <select name="subtipo" id="subtipo" onblur="regarga1()">
                             <?php
-                            $sql = "select * from subcategoria_producto";
+                            $sql = "select a.id_clasficacion,a.nombre from clasificacion as a inner join coleccion as b on a.id_clasficacion = b.id_coleccion";
                             $list = $cons->Consulta($sql);
                             foreach ($list as $row) {
                                 echo "<option value='$row[0]'>$row[1]</option>";
@@ -64,39 +64,38 @@ $cons = new Metodos();
                     <h2>Listado de productos</h2>
                 </caption>
                 <tr align=center id="tabla-encabezado">
-                    <th width="5%">ID</th>
+                    <th width="5%">REFERENCIA</th>
                     <th width="17%">NOMBRE</th>
-                    <th width="8%"> EXISTENCIA</th>
-                    <th width="18%">DESCRIPCIÓN</th>
-                    <th width="8%">COSTO</th>
-                    <th width="10%">IMAGEN</th>
-                    <th width="10%">SUBCATEGORIA</th>
-                    <th width="8%">TIPO</th>
-                    <th width="8%">ELIMINAR</th>
-                    <th width="8%">MODIFICAR</th>
+                    <th width="8%"> IMÁGEN</th>
+                    <th width="8%"> COSTO</th>
+                    <th width="28%">DESCRIPCIÓN</th>
+                    <th width="12%">CATEGORÍA</th>
+                    <th width="10%">COLECCIÓN</th>
+                    <th width="6%">ELIMINAR</th>
+                    <th width="6%">MODIFICAR</th>
                 </tr>
                 <?PHP
                 if (isset($_GET['categoria']) && isset($_GET['id'])) {
                     $categoria = $_GET['categoria'] . "";
                     if ($_GET['id'] == 1) {
-                        $result = $cons->ConProductoC($categoria);
+                        $result = $cons->ConProductoCat($categoria);
                     } elseif ($_GET['id'] == 2) {
-                        $result = $cons->ConProductoT($categoria);
+                        $result = $cons->ConProductoCol($categoria);
                     }
                 } else {
                     $result = $cons->ConProducto();
                 }
                 foreach ($result as $row) {
+                    $image = $cons->getImagenes($row[0]);
                 ?>
                     <tr align=center>
-                        <td><?php echo $row["id_producto"] ?></td>
-                        <td><?php echo $row["nombre"] ?></td>
-                        <td><?php echo $row["existencia"] ?></td>
-                        <td><?php echo $row["descripcion"] ?></td>
-                        <td><?php echo number_format($row["valor_venta"], 0) ?></td>
-                        <td><img src='../static/imagenes/productos/<?php echo $row["imagen"] ?>' width="80px" height="80px"></td>
-                        <td><?php echo $row["sub"] ?></td>
-                        <td><?php echo $row["tipo"] ?></td>
+                        <td><?php echo $row[0] ?></td>
+                        <td><?php echo $row[1] ?></td>
+                        <td><img src='../static/imagenes/productos/<?php echo $image[0] ?>' width="80px" height="80px"></td>
+                        <td><?php echo number_format($row[2], 0) ?></td>
+                        <td><?php echo $row[3] ?></td>
+                        <td><?php echo $row[4] ?></td>
+                        <td><?php echo $row[5] ?></td>
                         <td>
                             <button type="button" onclick="elimina( '<?php echo $row['id_producto'] ?>','modificarProducto.php',4)" class="boton-modifica-proveedor bt-eliminar">
                                 <img src="../static/imagenes/eliminar.png" height="30px" width="30px" alt="">

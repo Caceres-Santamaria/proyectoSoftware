@@ -1447,3 +1447,4 @@ INSERT INTO talla_producto(referencia,id_talla,existencia) VALUES
 ('T0029',4,10);
 
 
+select a.id_clasficacion,a.nombre from clasificacion as a inner join categoria on a.id_clasficacion = b.id_categoria

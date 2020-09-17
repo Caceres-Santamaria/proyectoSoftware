@@ -26,11 +26,11 @@
                     </li>
                     <li class="list-item"><a href="#"><span>Productos</span></a>
                         <ul class="colecciones">
-                        <li class="has-sub cateoria"><a href="modificarProducto.php"><span>Agregar Producto</span></a></li>
-                        <li class="has-sub cateoria"><a href="modificarCupon.php"><span>Modificar producto</span></a></li>
-                        <li class="has-sub cateoria"><a href="CatalogoAccesories.php"><span>Stock</span></a></li>
-                        <li class="has-sub cateoria"><a href="CatalogoAccesories.php"><span>Imágenes</span></a></li>
-                        <li class="has-sub cateoria"><a href="CatalogoAccesories.php"><span>Tallas</span></a></li>
+                        <li class="has-sub cateoria"><a href="agregarProducto.php"><span>Agregar Producto</span></a></li>
+                        <li class="has-sub cateoria"><a href="modificarProducto.php"><span>Modificar producto</span></a></li>
+                        <li class="has-sub cateoria"><a href="stock.php"><span>Stock</span></a></li>
+                        <li class="has-sub cateoria"><a href="imagenes.php"><span>Imágenes</span></a></li>
+                        <li class="has-sub cateoria"><a href="tallaProducto.php"><span>Tallas</span></a></li>
                         </ul>
                     </li>
                     <li class="list-item"><a href="masVendidos.php"><span>Más vendidos</span></a>

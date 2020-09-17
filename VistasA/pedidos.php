@@ -32,36 +32,39 @@ session_start();
                     <h2>Pedidos no enviados</h2>
                 </caption>
                 <tr align=center id="tabla-encabezado">
-                    <th>ID</th>
-                    <th>DIRECCIÓN</th>
-                    <th>FECHA Y HORA</th>
-                    <th>DESCRIPCIÓN</th>
-                    <th>COSTO DOMI</th>
+                    <th>NÚMERO</th>
                     <th>CLIENTE</th>
-                    <th>N° SEGUIMIENTO</th>
-                    <th>EMPRESA ENVÍO</th>
-                    <th>ESTADO</th>
-                    <th>PERSONA</th>
+                    <th>DEPARTAMENTO</th>
+                    <th>CIUDAD</th>
+                    <th>DIRECCIÓN</th>
+                    <th>ESPECIFICACIÓN</th>
                     <th>TELÉFONO</th>
+                    <th>N° SEGUIMIENTO</th>
+                    <th>ESTADO</th>
+                    <th>DESCUENTO</th>
+                    <th>FECHA</th>
                     <th>MODIFICAR</th>
                 </tr>
                 <?PHP
                 $cons = new Metodos();
                 $result = $cons->ConPedido();
-                foreach ($result as $row) {
+                if ($result != null) {
+                    foreach ($result as $row) {
+                        $ciudad = $cons->getCiudad($row[3]);
+                        $departamento = $cons->getDepartamento($row[2]);
                 ?>
                     <tr align=center>
-                        <td><?php echo $row["id_pedido"] ?></td>
-                        <td><?php echo $row["direccion"] ?></td>
-                        <td><?php echo $row["fecha"] . " " . $row["hora"] ?></td>
-                        <td><?php echo $row["descripcion"] ?></td>
-                        <td><?php echo $row["domi"] ?></td>
-                        <td><?php echo $row["cliente"] ?></td>
-                        <td><?php echo $row["nro_seguimiento"] ?></td>
-                        <td><?php echo $row["empresa_envio"] ?></td>
-                        <td><?php echo $row["estado"] ?></td>
-                        <td><?php echo $row["persona"] ?></td>
-                        <td><?php echo $row["telefono"] ?></td>
+                        <td><?php echo $row[0] ?></td>
+                        <td><?php echo $row[1] ?></td>
+                        <td><?php echo $departamento[0][1] ?></td>
+                        <td><?php echo $ciudad[0][2] ?></td>
+                        <td><?php echo $row[4] ?></td>
+                        <td><?php echo $row[5] ?></td>
+                        <td><?php echo $row[6] ?></td>
+                        <td><?php echo $row[7] ?></td>
+                        <td><?php echo $row[8] ?></td>
+                        <td><?php echo number_format($row[9],1) ?></td>
+                        <td><?php echo $row[10] ?></td>
                         <td>
                             <button type="button" id="modifica" onclick="modifica( '<?php echo $row['id_pedido'] ?>','pedidos.php',3)" class="boton-modifica-proveedor">
                                 <img id="img" src="../static/imagenes/modificar.png" height="30px" width="30px" alt="">
@@ -70,6 +73,12 @@ session_start();
                     </tr>
                 <?php
                 }
+            }
+            else{
+                echo '<tr align=center>';
+                echo '<td colspan="12">Todos los pedidos se han sido enviados</td>';
+                echo ' </tr>';
+            }
                 ?>
             </table>
         </section>

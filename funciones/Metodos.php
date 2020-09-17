@@ -191,6 +191,17 @@ class Metodos
         }
         return $list;
     }
+    public function getDepartamento($codc)
+    {
+        $cnx = new conexionDB();
+        $conn = $cnx->getConexion();
+        $query = "select * from departamento where id_departamento = " . $codc . "";
+        $list = [];
+        foreach ($conn->query($query) as $row) {
+            $list[] = $row;
+        }
+        return $list;
+    }
     public function getCiudadDepartamento($codc)
     {
         $cnx = new conexionDB();
@@ -308,9 +319,75 @@ class Metodos
         }
         return $list;
     }
-
-
-
+    public function ConProductoCat($cat)
+    {
+        $cnx = new conexionDB();
+        $conn = $cnx->getConexion();
+        $query = "select a.referencia, a.nombre,a.costo, a.descripcion,(select c.nombre from categoria as d inner join clasificacion as c on id_clasficacion = d.id_categoria where id_categoria = a.categoria) as cat,(select e.nombre from coleccion as f inner join clasificacion as e on id_clasficacion = f.id_coleccion where id_coleccion = a.coleccion) as col from producto as a where a.categoria = '$cat'";
+        $list = [];
+        foreach ($conn->query($query) as $row) {
+            $list[] = $row;
+        }
+        return $list;
+    }
+    public function ConProductoCol($cat)
+    {
+        $cnx = new conexionDB();
+        $conn = $cnx->getConexion();
+        $query = "select a.referencia, a.nombre,a.costo, a.descripcion,(select c.nombre from categoria as d inner join clasificacion as c on id_clasficacion = d.id_categoria where id_categoria = a.categoria) as cat,(select e.nombre from coleccion as f inner join clasificacion as e on id_clasficacion = f.id_coleccion where id_coleccion = a.coleccion) as col from producto as a where a.coleccion = '$cat'";
+        $list = [];
+        foreach ($conn->query($query) as $row) {
+            $list[] = $row;
+        }
+        return $list;
+    }
+    public function ConProducto()
+    {
+        $cnx = new conexionDB();
+        $conn = $cnx->getConexion();
+        $query = "select a.referencia, a.nombre,a.costo, a.descripcion,(select c.nombre from categoria as d inner join clasificacion as c on id_clasficacion = d.id_categoria where id_categoria = a.categoria) as cat,(select e.nombre from coleccion as f inner join clasificacion as e on id_clasficacion = f.id_coleccion where id_coleccion = a.coleccion) as col from producto as a order by a.categoria LIMIT 15";
+        $list = [];
+        foreach ($conn->query($query) as $row) {
+            $list[] = $row;
+        }
+        return $list;
+    }
+    public function ConPedido()
+    {
+        $cnx = new conexionDB();
+        $conn = $cnx->getConexion();
+        $query = "select * from pedido where estado = 'no enviado'";
+        //"select a.id_pedido,a.direccion, a.hora,a.descripcion, (select costo from domicilio where a.id_domicilio=id_domicilio) as domi,(select primer_nombre ||' '||primer_apellido from cliente where a.id_cliente=identificacion) as cliente, a.nro_seguimiento, (select nombre from empresa_envio where a.id_empresa_envio=id_empresa_envio) as empresa_envio, (select nombre from estado_pedido where a.id_estado=id_estado) as estado,a.persona,a.telefono,a.fecha from pedido as a where a.id_estado = '01'";
+        $list = [];
+        foreach ($conn->query($query) as $row) {
+            $list[] = $row;
+        }
+        return $list;
+    }
+    public function stock($ref)
+    {
+        $cnx = new conexionDB();
+        $conn = $cnx->getConexion();
+        $query = "select p.referencia,p.nombre,(select t.nombre from talla as t where t.id_talla=d.id_talla),d.existencia from producto as p inner join talla_producto as d on p.referencia = d.referencia where p.referencia='$ref' order by d.existencia asc";
+        //"select a.id_pedido,a.direccion, a.hora,a.descripcion, (select costo from domicilio where a.id_domicilio=id_domicilio) as domi,(select primer_nombre ||' '||primer_apellido from cliente where a.id_cliente=identificacion) as cliente, a.nro_seguimiento, (select nombre from empresa_envio where a.id_empresa_envio=id_empresa_envio) as empresa_envio, (select nombre from estado_pedido where a.id_estado=id_estado) as estado,a.persona,a.telefono,a.fecha from pedido as a where a.id_estado = '01'";
+        $list = [];
+        foreach ($conn->query($query) as $row) {
+            $list[] = $row;
+        }
+        return $list;
+    }
+    public function stock2()
+    {
+        $cnx = new conexionDB();
+        $conn = $cnx->getConexion();
+        $query = "select p.referencia,p.nombre,(select t.nombre from talla as t where t.id_talla=d.id_talla),d.existencia from producto as p inner join talla_producto as d on p.referencia = d.referencia order by d.existencia asc";
+        //"select a.id_pedido,a.direccion, a.hora,a.descripcion, (select costo from domicilio where a.id_domicilio=id_domicilio) as domi,(select primer_nombre ||' '||primer_apellido from cliente where a.id_cliente=identificacion) as cliente, a.nro_seguimiento, (select nombre from empresa_envio where a.id_empresa_envio=id_empresa_envio) as empresa_envio, (select nombre from estado_pedido where a.id_estado=id_estado) as estado,a.persona,a.telefono,a.fecha from pedido as a where a.id_estado = '01'";
+        $list = [];
+        foreach ($conn->query($query) as $row) {
+            $list[] = $row;
+        }
+        return $list;
+    }
 
 
 
@@ -370,50 +447,6 @@ class Metodos
         $cnx = new conexionDB();
         $conn = $cnx->getConexion();
         $query = "select * from pedido_producto where id_pedido = " . $idPedido;
-        $list = [];
-        foreach ($conn->query($query) as $row) {
-            $list[] = $row;
-        }
-        return $list;
-    }
-    public function ConProducto()
-    {
-        $cnx = new conexionDB();
-        $conn = $cnx->getConexion();
-        $query = "select a.id_producto, a.nombre,a.existencia, a.descripcion, a.valor_venta, a.imagen,(select nombre from subcategoria_producto where id_subcategoria = a.id_subcategoria) as sub,(select nombre from tipo_producto where id_tipo_producto = a.id_tipo_producto) as tipo from producto as a FETCH FIRST 40 ROWS ONLY";
-        $list = [];
-        foreach ($conn->query($query) as $row) {
-            $list[] = $row;
-        }
-        return $list;
-    }
-    public function ConProductoT($cat)
-    {
-        $cnx = new conexionDB();
-        $conn = $cnx->getConexion();
-        $query = "select a.id_producto, a.nombre,a.existencia, a.descripcion, a.valor_venta, a.imagen,(select nombre from subcategoria_producto where id_subcategoria = a.id_subcategoria) as sub,(select nombre from tipo_producto where id_tipo_producto = a.id_tipo_producto) as tipo from producto as a where a.id_subcategoria = '$cat'";
-        $list = [];
-        foreach ($conn->query($query) as $row) {
-            $list[] = $row;
-        }
-        return $list;
-    }
-    public function ConProductoC($cat)
-    {
-        $cnx = new conexionDB();
-        $conn = $cnx->getConexion();
-        $query = "select a.id_producto, a.nombre,a.existencia, a.descripcion, a.valor_venta, a.imagen,(select nombre from subcategoria_producto where id_subcategoria = a.id_subcategoria) as sub,(select nombre from tipo_producto where id_tipo_producto = a.id_tipo_producto) as tipo from producto as a where a.id_tipo_producto = '" . $cat . "'";
-        $list = [];
-        foreach ($conn->query($query) as $row) {
-            $list[] = $row;
-        }
-        return $list;
-    }
-    public function ConPedido()
-    {
-        $cnx = new conexionDB();
-        $conn = $cnx->getConexion();
-        $query = "select a.id_pedido,a.direccion, a.hora,a.descripcion, (select costo from domicilio where a.id_domicilio=id_domicilio) as domi,(select primer_nombre ||' '||primer_apellido from cliente where a.id_cliente=identificacion) as cliente, a.nro_seguimiento, (select nombre from empresa_envio where a.id_empresa_envio=id_empresa_envio) as empresa_envio, (select nombre from estado_pedido where a.id_estado=id_estado) as estado,a.persona,a.telefono,a.fecha from pedido as a where a.id_estado = '01'";
         $list = [];
         foreach ($conn->query($query) as $row) {
             $list[] = $row;

@@ -51,35 +51,45 @@ $cons = new Metodos();
                     <h2>Listado de pedidos</h2>
                 </caption>
                 <tr align=center>
-                    <th>ID</th>
-                    <th> FECHA Y HORA</th>
+                    <th>NÚMERO</th>
+                    <th> FECHA</th>
                     <th>CLIENTE</th>
-                    <th>EMPRESA DE ENVIO</th>
-                    <th>COSTO DOMICILIO</th>
+                    <th>COSTO ENVÍO</th>
+                    <th>DESCUENTO</th>
                     <th>SUBTOTAL PEDIDO</th>
+                    <th>TOTAL</th>
                 </tr>
                 <?PHP
                 if (isset($_GET['fi']) && isset($_GET['ff'])) {
                     $fechainicial = $_GET['fi'];
                     $fechafinal = $_GET['ff'];
-                    $sql = "select a.id_pedido, a.hora,(select costo from domicilio where a.id_domicilio=id_domicilio) as domi, id_cliente, (select nombre from empresa_envio where a.id_empresa_envio=id_empresa_envio) as empresa_envio,a.fecha, (select sum(b.cantidad * b.precio_unidad) from pedido_producto as b where b.id_pedido=a.id_pedido) as subtotal from pedido as a where fecha between '$fechainicial' and '$fechafinal'";
+                    $sql = "select a.numero, a.fecha,a.cliente,(select costo from ciudad where a.ciudad=id_ciudad) as domi, (select sum(b.cantidad * b.precio_unidad) from detalle_pedido as b where b.numero_pedido=a.numero) as subtotal,a.descuento from pedido as a where a.fecha between '$fechainicial' and '$fechafinal'";
                     $result = $cons->Consulta($sql);
                 } else {
-                    $sql = "select a.id_pedido, a.hora,(select costo from domicilio where a.id_domicilio=id_domicilio) as domi, id_cliente, (select nombre from empresa_envio where a.id_empresa_envio=id_empresa_envio) as empresa_envio,a.fecha, (select sum(b.cantidad * b.precio_unidad) from pedido_producto as b where b.id_pedido=a.id_pedido) as subtotal from pedido as a";
+                    $sql = "select a.numero, a.fecha,a.cliente,(select costo from ciudad where a.ciudad=id_ciudad) as domi, (select sum(b.cantidad * b.precio_unidad) from detalle_pedido as b where b.numero_pedido=a.numero) as subtotal,a.descuento from pedido as a";
                     $result = $cons->Consulta($sql);
                 }
+                if ($result != null) {
                 foreach ($result as $row) {
                 ?>
                     <tr align=center>
-                        <td><?php echo $row["id_pedido"] ?></td>
-                        <td><?php echo $row["fecha"] . " " . $row["hora"] ?></td>
-                        <td><?php echo $row["id_cliente"] ?></td>
-                        <td><?php echo $row["empresa_envio"] ?></td>
-                        <td><?php echo '$ ' . number_format($row["domi"], 0) ?></td>
-                        <td><?php echo '$ ' . number_format($row["subtotal"], 0) ?></td>
+                        <td><?php echo $row[0] ?></td>
+                        <td><?php echo $row[1] ?></td>
+                        <td><?php echo $row[2] ?></td>
+                        <td><?php echo '$ ' . number_format($row[3], 0) ?></td>
+                        <td><?php echo '$ ' . number_format($row[5], 0) ?></td>
+                        <td><?php echo '$ ' . number_format($row[4], 0) ?></td>
+                        <td><?php echo '$ ' . number_format($row[4]-$row[5]+$row[3], 0) ?></td>
                     </tr>
                 <?php
                 }
+            }
+            else
+            {
+                echo '<tr align=center>';
+                echo '<td colspan="7">No se han realizado pedidos en estas fechas</td>';
+                echo '</tr>';
+            }
                 ?>
             </table>
         </section>
@@ -126,7 +136,7 @@ $cons = new Metodos();
         function recarga() {
             var fechainicio = document.getElementById("fecha").value;
             var fechafin = document.getElementById("fechafin").value;
-            location.href = "../vistasC/pedidos.php?fi=" + fechainicio + "&ff=" + fechafin;
+            location.href = "../VistasA/TodosPedidos.php?fi=" + fechainicio + "&ff=" + fechafin;
         }
     </script>
 </body>

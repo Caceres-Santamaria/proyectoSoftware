@@ -2,14 +2,13 @@
 <?php
 include "../funciones/Metodos.php";
 session_start();
-$cons = new Metodos();
 ?>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agrega Cupón</title>
+    <title>Talla productos</title>
     <link rel="stylesheet" href="../static/estilos/general.css">
     <script src="../static/validaciones/valida.js"></script>
     <script src="../static/validaciones/jquery.min.js"></script>
@@ -23,39 +22,59 @@ $cons = new Metodos();
 </head>
 
 <body>
-    <div class="contenedor">
+<div class="contenedor">
         <?php
         include '../componentes/menuA.php';
         ?>
-        <section class="padin-section">
-            <table class="table table-bordered table-responsive tabla-proveedor">
+        <section class="padin-section modifica">
+            <table style="width: 40%; background:white;" cellpadding="10px" class="table table-bordered tabla-proveedor">
                 <caption>
-                    <h2>Listado de Cupones</h2>
+                    <h3>Agregar Talla</h3>
+                </caption>
+                <form method="POST" action="../funciones/.php">
+                    <tr id="tabla-encabezado">
+                        <td colspan="2" align="center">
+                            <img src="../static/imagenes/t-shirt.jpg" width="250px">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Nombre talla:*
+                        </td>
+                        <td>
+                            <input type="text" name="talla" id="talla" title="Nombre del talla"  required placeholder="Nombre del cupón" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" colspan="2">
+                            <button type="submit" name="enviar" value="Enviar" class="btn bc">Enviar</button>
+                            <button type="reset" name="resetear" value="Resetear" class="btn bc">Resetear</button>
+                        </td>
+                    </tr>
+                </form>
+            </table>
+            <br><br>
+            <table class="table table-bordered tabla-proveedor">
+                <caption>
+                    <h3>Listado de Tallas</h3>
                 </caption>
                 <tr align=center id="tabla-encabezado">
-                    <th width="5%">ID</th>
-                    <th width="17%">% DESCUENTO</th>
-                    <th width="8%">ELIMINAR</th>
-                    <th width="8%">MODIFICAR</th>
+                    <th>ID</th>
+                    <th>TALLA</th>
+                    <th>ELIMINAR</th>
+                    <th>MODIFICAR</th>
                 </tr>
                 <?PHP
-                if (isset($_GET['categoria']) && isset($_GET['id'])) {
-                    $categoria = $_GET['categoria'] . "";
-                    if ($_GET['id'] == 1) {
-                        $result = $cons->ConProductoC($categoria);
-                    } elseif ($_GET['id'] == 2) {
-                        $result = $cons->ConProductoT($categoria);
-                    }
-                } else {
-                    $result = $cons->ConProducto();
-                }
+                $cons = new Metodos();
+                $sql = "select * from talla";
+                $result = $cons->Consulta($sql);
                 foreach ($result as $row) {
                 ?>
                     <tr align=center>
-                        <td><?php echo $row["id_producto"] ?></td>
-                        <td><?php echo $row["nombre"] ?></td>
+                        <td><?php echo $row[0] ?></td>
+                        <td><?php echo $row[1] ?></td>
                         <td>
-                            <button type="button" onclick="elimina( '<?php echo $row['id_producto'] ?>','modificarProducto.php',4)" class="boton-modifica-proveedor bt-eliminar">
+                            <button type="button" onclick="eliminaCiu( '<?php echo $row[0] ?>')" class="boton-modifica-proveedor bt-eliminar">
                                 <img src="../static/imagenes/eliminar.png" height="30px" width="30px" alt="">
                             </button>
                         </td>

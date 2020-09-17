@@ -34,7 +34,7 @@ session_start();
                 <form method="POST" action="../funciones/.php">
                     <tr id="tabla-encabezado">
                         <td colspan="2" align="center">
-                            <img src="../static/imagenes/cupon.png" width="150px">
+                            <img src="../static/imagenes/flamma.png" width="250px">
                         </td>
                     </tr>
                     <tr>
@@ -69,19 +69,22 @@ session_start();
                 <tr align=center id="tabla-encabezado">
                     <th>ID</th>
                     <th>NOMBRE</th>
+                    <th>NOMBRE IMÁGEN</th>
                     <th>IMÁGEN</th>
                     <th>ELIMINAR</th>
                     <th>MODIFICAR</th>
                 </tr>
                 <?PHP
                 $cons = new Metodos();
-                $sql = "select * from cupon";
+                $sql = "select  a.id_clasficacion,a.nombre,a.imagen from clasificacion as a inner join categoria as b on a.id_clasficacion = b.id_categoria";
                 $result = $cons->Consulta($sql);
                 foreach ($result as $row) {
                 ?>
                     <tr align=center>
                         <td><?php echo $row[0] ?></td>
                         <td><?php echo $row[1] ?></td>
+                        <td><?php echo $row[2] ?></td>
+                        <td><img src="../static/imagenes/<?php echo $row[2] ?>" alt="<?php echo $row[1] ?>" width="120px"></td>
                         <td>
                             <button type="button" onclick="eliminaCiu( '<?php echo $row[0] ?>')" class="boton-modifica-proveedor bt-eliminar">
                                 <img src="../static/imagenes/eliminar.png" height="30px" width="30px" alt="">

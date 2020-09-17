@@ -36,12 +36,12 @@ session_start();
                     <form method="POST" action="../funciones/registrar_producto.php" onsubmit="return validar_longitud3('id') && validar_longitud40('nombre') && validar_longitud100('descripcion') && validar_longitud30('imagen')&& validar_combos('tipo')&&validar_combos('subcategoria')">
                         <tr id="tabla-encabezado"">
                             <td colspan=" 2" align="center">
-                            <img src="../static/imagenes/slider2.jpg" width="400px" class="img-prod">
+                            <img src="../static/imagenes/slider2.jpg" width="300px" class="img-prod">
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                Id producto:*
+                                Referencia:*
                             </td>
                             <td>
                                 <input type="text" name="idprod" id="id" title="id" onkeypress="return validar_numeros(event)" required placeholder="Escriba el id del producto" />
@@ -57,18 +57,10 @@ session_start();
                         </tr>
                         <tr>
                             <td>
-                                Imagen:*
-                            </td>
-                            <td>
-                                <input type="text" name="imagen" id="imagen" title="imagen" required placeholder="Escriba el nombre de la imagen" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
                                 Descripcion del producto:*
                             </td>
                             <td>
-                                <input type="text" name="descripcion" id=descripcion title="descripcion" required placeholder="Escriba la descripcion del producto" />
+                                <textarea name="descripcion" id=descripcion title="descripcion" required placeholder="Escriba la descripcion del producto"   rows="30"></textarea>
                             </td>
                         </tr>
                         <tr>
@@ -81,21 +73,13 @@ session_start();
                         </tr>
                         <tr>
                             <td>
-                                Existencia:*
-                            </td>
-                            <td>
-                                <input type="number" name="existencia" id="existencia" onclick="noNegativo('existencia')" onkeypress="return valida_numeros(event)" title="existencia" required placeholder="Escriba la existencia del producto" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Tipo de producto:*
+                                Categoría:*
                             </td>
                             <td>
                                 <select name="combo1" id="tipo" title="tipo">
                                     <option value="vacio">...</option>
                                     <?PHP
-                                    $sql = "select * from tipo_producto";
+                                    $sql = "select a.id_clasficacion,a.nombre from clasificacion as a inner join categoria as b on a.id_clasficacion = b.id_categoria";
                                     $list = $obj->Consulta($sql);
                                     foreach ($list as $row) {
                                         echo "<option value='$row[0]'>$row[1]</option>";
@@ -106,13 +90,13 @@ session_start();
                         </tr>
                         <tr>
                             <td>
-                                Subcategoria de producto:*
+                                Colección:*
                             </td>
                             <td>
                                 <select name="combo2" id="subcategoria" title="subcategoria">
                                     <option value="vacio">...</option>
                                     <?PHP
-                                    $sql = "select * from subcategoria_producto";
+                                    $sql = "select a.id_clasficacion,a.nombre from clasificacion as a inner join coleccion as b on a.id_clasficacion = b.id_coleccion";
                                     $list = $obj->Consulta($sql);
                                     foreach ($list as $row) {
                                         echo "<option value='$row[0]'>$row[1]</option>";

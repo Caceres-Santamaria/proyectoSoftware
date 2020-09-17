@@ -49,11 +49,12 @@ $cons = new Metodos();
             <table class="table table-bordered tabla-proveedor">
                 <caption>
                     <br> <br> <br> <br>
-                    <h2>Listado de pedidos</h2>
+                    <h2>Productos más vendidos</h2>
                 </caption>
                 <tr align=center>
                     <th>CÓDIGO</th>
                     <th>NOMBRE</th>
+                    <th>TALLA</th>
                     <th>IMÁGEN</th>
                     <th>CANTIDAD VENDIDA</th>
                 </tr>
@@ -61,23 +62,32 @@ $cons = new Metodos();
                 if (isset($_GET['fi']) && isset($_GET['ff'])) {
                     $fechainicial = $_GET['fi'];
                     $fechafinal = $_GET['ff'];
-                    $sql = "select distinct a.id_producto,a.nombre,a.imagen,(select sum(b.cantidad) as cant from pedido_producto as b where b.id_producto = a.id_producto) from producto as a inner join pedido_producto as c on a.id_producto=c.id_producto inner join pedido as p on p.id_pedido=c.id_pedido where p.fecha between '$fechainicial' and '$fechafinal' order by cant desc";
+                    $sql = "select distinct a.referencia,a.nombre,(select z.nombre from talla as z where c.id_talla = z.id_talla) as talla,(select sum(b.cantidad) as cant from detalle_pedido as b where b.referencia = a.referencia) as cant from producto as a inner join detalle_pedido as c on a.referencia=c.referencia inner join pedido as p on p.numero=c.numero_pedido where p.fecha between '$fechainicial' and '$fechafinal' order by cant desc";
                     $result = $cons->Consulta($sql);
                 } else {
-                    $sql = "select distinct a.id_producto,a.nombre,a.imagen,(select sum(b.cantidad) as cant from pedido_producto as b where b.id_producto = a.id_producto) from producto as a inner join pedido_producto as c on a.id_producto=c.id_producto order by cant desc";
+                    $sql = "select distinct a.referencia,a.nombre,(select z.nombre from talla as z where c.id_talla = z.id_talla) as talla,(select sum(b.cantidad) as cant from detalle_pedido as b where b.referencia = a.referencia) as cant from producto as a inner join detalle_pedido as c on a.referencia=c.referencia inner join pedido as p on p.numero=c.numero_pedido order by cant desc limit 10";
                     $result = $cons->Consulta($sql);
                 }
                 if ($result != null) {
                     foreach ($result as $row) {
+                        $image = $cons->getImagenes($row[0]);
                 ?>
                         <tr align=center style="vertical-align: middle !important;">
                             <td><?php echo $row[0] ?></td>
                             <td><?php echo $row[1] ?></td>
-                            <td><img src="../static/imagenes/productos/<?php echo $row[2] ?>" alt="Producto" width="150px" height="150px"></td>
+                            <td><?php echo $row[2] ?></td>
+                            <td><img src="../static/imagenes/productos/<?php echo $image[0] ?>" alt="Producto" width="150px" height="150px"></td>
                             <td><?php echo $row[3] ?></td>
                         </tr>
                 <?php
                     }
+                }
+                else{
+                ?>
+                    <tr align=center style="vertical-align: middle !important;">
+                        <td colspan="5">No hay productos vendidos en éstas fechas</td>
+                    </tr>
+                <?php
                 }
                 ?>
             </table>
@@ -125,7 +135,7 @@ $cons = new Metodos();
         function recarga() {
             var fechainicio = document.getElementById("fecha").value;
             var fechafin = document.getElementById("fechafin").value;
-            location.href = "../vistasC/masVendidos.php?fi=" + fechainicio + "&ff=" + fechafin;
+            location.href = "../VistasA/masVendidos.php?fi=" + fechainicio + "&ff=" + fechafin;
         }
     </script>
 </body>
