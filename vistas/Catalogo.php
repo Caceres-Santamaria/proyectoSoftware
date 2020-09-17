@@ -64,7 +64,7 @@ if(!isset($_SESSION['imagenes']))
                 <div class="card-header">
                     <h1 class="card-title" style=" font-size: 30px !important; text-align: center !important;" id="Pul"><?php echo $nombre ?></h1>
                 </div>
-                <div class="card-body">
+                <div class="card-body catalogo">
                     <?php
 
                     $num = 0;
@@ -82,7 +82,7 @@ if(!isset($_SESSION['imagenes']))
                             $cod = "" . $reg[0];
                             echo '<p class="card-text precio" style="color: #65D110; font-size: 25px;">$' .number_format($reg[4],0) . '</p>';
                     ?>
-                            <button type='button' class='btn boton btn-lg btn-block' onclick="enviar('<?php echo $cod ?>')">Agregar</button>
+                            <button type='button' class='btn boton btn-lg btn-block agregar' onclick="enviar('<?php echo $cod ?>')">Agregar</button>
                         <?php
                             echo '</div>';
                             echo '</div>';
@@ -97,7 +97,7 @@ if(!isset($_SESSION['imagenes']))
                             $cod = "" . $reg[0];
                             echo '<p class="card-text precio" style="color: #65D110; font-size: 25px;">$' .number_format( $reg[4],0) . '</p>';
                         ?>
-                            <button type='button' class='btn boton btn-lg btn-block' onclick="enviar('<?php echo $cod ?>')">Agregar</button>
+                            <button type='button' class='btn boton btn-lg btn-block agregar' onclick="enviar('<?php echo $cod ?>')">Agregar</button>
                     <?php
                             echo '</div>';
                             echo '</div>';
