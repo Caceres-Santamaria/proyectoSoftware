@@ -58,7 +58,7 @@ if(!isset($_SESSION['imagenes']))
                 $total = 0;
             ?>
                 <div class="table-responsive">
-                    <table class="table table-hover table-bordered" style="width: 100%;">
+                    <table class="table table-hover tabla-carrito" style="width: 100%; border:0;">
                         <thead>
                             <tr class="carrito-cabecera">
                                 <th scope="col" class="text-center">Producto</th>

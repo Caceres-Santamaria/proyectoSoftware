@@ -7,8 +7,21 @@
     background: #fff;
     padding: 5em 15em;
 }
-.content_us p{
+.content_us .descripcion{
     padding: 2em 2em;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    width: 100%;
+    letter-spacing: 1.5px;
+}
+
+.imagen{
+    padding-bottom: 2em;
+}
+.autores{
+    margin: 0%;
+    padding: .5%;
     justify-content: center;
     align-items: center;
     font-size: 1rem;

@@ -152,7 +152,7 @@
 }
 
 .botmod:hover {
-    background: linear-gradient(120deg, #f48fb1, #ec407a) !important;
+    background: linear-gradient(120deg, #ffd45f, #f5a105) !important;
     transition: .5s !important;
 }
 
@@ -186,14 +186,14 @@ section {
 
 .verDatos {
     background: white !important;
-    border: 1px solid #c78ba0 !important;
+    border: 1px solid #ff7b00 !important;
     font-size: 14px !important;
     margin: auto !important;
     width: auto !important;
 }
 
 .verDatos tr:hover {
-    background: #fce4ec !important;
+    background: #ffe19d !important;
     border: 1px solid white !important;
 }
 
@@ -261,8 +261,8 @@ section {
     text-align: center;
     padding-top: 2rem;
     padding-bottom: .5rem;
-    background: #fce4ec;
-    border-bottom: 2px solid #f8bbd0;
+    background: #ffd27e;
+    border-bottom: 2px solid #ffbb00;
 }
 
 .panel-heading1 {
@@ -270,7 +270,7 @@ section {
     text-align: center;
     padding-top: 2rem;
     padding-bottom: .5rem;
-    background: #fce4ec;
+    background: #ffd987;
 }
 
 .nopedido {
@@ -295,7 +295,7 @@ section {
 }
 
 .pedido {
-    background: #f3adc4;
+    background: #ffe367;
     border-bottom: 3px solid #b0bec5;
     margin-top: 10px;
     padding-top: 1rem;
@@ -314,7 +314,7 @@ section {
 }
 
 .encabezado-detalle {
-    background: #fce4ec;
+    background: #ffd27e;
     border-bottom: 1px solid #b0bec5;
     padding-top: 1rem;
 }
@@ -429,7 +429,7 @@ section {
     width: 100%;
     height: 50px;
     border: none;
-    background: linear-gradient(120deg, #880e4f, #f48fb1, #d81b60, #880e4f);
+    background: linear-gradient(120deg, #ffbb00, #f1b84d, #d8a61b, #ffbb00);
     background-size: 200%;
     color: rgb(247, 239, 239);
     outline: none;
@@ -558,18 +558,18 @@ section {
 .elemento input {
     width: 250px;
     height: 2rem;
-    border: 1px solid #f8bbd0;
+    border: 1px solid #ffb938;
     color: black;
-    background: #fcf4f6;
+    background: #fff1d7;
 }
 
 .elemento select {
     width: 250px !important;
     height: 2rem;
     text-align: center;
-    border: 1px solid #f8bbd0;
+    border: 1px solid #fbb738;
     color: black;
-    background: #fcf4f6;
+    background: #fff1d7;
 }
 
 #ldescripcion {
@@ -580,9 +580,9 @@ section {
     width: 250px;
     height: 4rem;
     max-height: 5rem;
-    border: 1px solid #f8bbd0;
+    border: 1px solid #fbb738;
     color: black;
-    background: #fcf4f6;
+    background: #fff1d7;
 }
 
 .elemento p {
@@ -5708,11 +5708,17 @@ input[type="button"].btn-block {
     border-bottom-left-radius: 0.25rem;
 }
 
+.tabla-carrito{
+    border:0px solid #fff !important;
+}
+
 .card-body {
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
     min-height: 1px;
     padding: 1.25rem;
+    justify-content: center;
+    align-items: center;
 }
 
 .card-title {
