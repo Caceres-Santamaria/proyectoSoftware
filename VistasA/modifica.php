@@ -301,7 +301,7 @@ $obj = new Metodos();
                                     Número de pedido:*
                                 </td>
                                 <td>
-                                    <input type="text" name="pedidoId" id="idped" title="idpedido" required value="<?php echo $row[0] ?>" readonly />
+                                    <input type="text" name="numero" id="numero" title="idpedido" required value="<?php echo $row[0] ?>" readonly />
                                 </td>
                             </tr>
                             <tr>
@@ -427,7 +427,7 @@ $obj = new Metodos();
                                     Id Talla:*
                                 </td>
                                 <td>
-                                    <input type="number" name="id" id="id" title="Id talla" required placeholder="Nombre talla" value="<?php echo $row[0]; ?>" readonly />
+                                    <input type="number" name="idT" id="idT" title="Id talla" required placeholder="Nombre talla" value="<?php echo $row[0]; ?>" readonly />
                                 </td>
                             </tr>
                             <tr>
@@ -435,7 +435,7 @@ $obj = new Metodos();
                                     Nombre talla:*
                                 </td>
                                 <td>
-                                    <input type="text" name="talla" id="talla" title="Nombre del talla" required placeholder="Nombre del cupón" value="<?php echo $row[1] ?>" />
+                                    <input type="text" name="talla" id="talla" title="Nombre del talla" required placeholder="Nombre de la talla" value="<?php echo $row[1] ?>" />
                                 </td>
                             </tr>
                             <tr>
