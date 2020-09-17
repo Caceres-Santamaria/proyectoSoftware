@@ -29,18 +29,23 @@ $objMetodo= new Metodos();
         <main class="content_us">
             <div class="nosotros">
                 <h2>ACERCA DE NOSOTROS</h2>
-                <p>Creamos con el objetivo de inspirar a las personas a expresarse y encontrar su identidad</p>
-                <img src="../static/imagenes/us1.JPG" alt="">
-                <p>Somos talento colombiano desde el diseño hasta la confección siendo una
-                    comunidad de inspiración para todo aquel que la usa.
-                    Tenemos la mente joven y estamos siempre atentos a cada idea para el
-                    crecimiento de la marca esperamos que la gente se identifique y puedan ser
-                    ellos mismos</p>
-                <img src="../static/imagenes/us2.JPG" alt="">
-                <p>El streetwear nos da la posibilidad de crear sin ser enfocado a un genero, optando con prendas
-                    con actitud y sin restricciones. Tenemos un espíritu artesando donde las personas son lienzo
-                    y queremos que quien la use se sienta cómodo y a la vez pueda verse lujoso y sensacional.
+                <p class="descripcion">
+                El sitio web de flamma permite a los usuarios visualizar sus productos de interés por medio de categorías o colecciones, 
+                seleccionarlos y ver su descripción, seleccionar la talla que desee para su prenda si está disponible, así como la 
+                cantidad que desea comprar de cada producto, seguido de esto podrá agregarlo al carrito. Para confirmar el pedido, al usuario 
+                se le solicitan los datos básicos para el envío de sus productos, tales como el nombre, dirección, número de contacto y ciudad 
+                hacia dónde va dirigido el pedido, según esta, se le agrega el costo del envío, si el usuario reside en el área metropolitana de Bucaramanga, 
+                tendrá la opción de hacer el pago contra entrega. Por otro lado, si en el momento en que el cliente desee realizar una compra el producto no se encuentre 
+                disponible, el cliente podrá solicitar un aviso de stock, que llegará directamente al correo electrónico que deb brindar para poder ser notificado, 
+                este correo avisará que esta nuevamente en stock el producto que deseaba. 
                 </p>
+                <div class="imagen">
+                <img src="../static/imagenes/us2.JPG" alt="">
+                </div>
+                <p class="autores">AUTORES:</p>
+                <p class="autores" >Nelson Alexis Cáceres Carreño</p>
+                <p class="autores">Jenny Marcela Santamaría Rincón</p>
+                
             </div>
         </main>
         <?php
