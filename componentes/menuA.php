@@ -1,9 +1,3 @@
-
-<script>
-    function carrito(){
-        location.href = "MuestraCarrito.php";
-    }
-</script>
 <header class="header">
             <div class="menu-movil">
                 <button class="menu-boton">
@@ -23,18 +17,20 @@
             <nav class="menu">
                 <ul class="menu-list">
                     <li class="list-item active"><a href="inicioA.php" class="home"><i class="fas fa-home"></i><span>HOME</span></a></li>
-                    <li class="list-item"><a href="#"><span>Agregar</span></a>
-                        <ul class="categorias">
-                            <li class="has-sub cateoria"><a href="agregarCiudad.php"><span>Ciudades</span></a></li>
-                            <li class="has-sub cateoria"><a href="agregarProducto.php"><span>Productos</span></a></li>
-                            <li class="has-sub cateoria"><a href="agregarCupon.php"><span>Cupones</span></a></li>
+                    <li class="list-item"><a href="cupon.php"><span>Cupón</span></a>
+                    <li class="list-item"><a href="#"><span>Clasificación</span></a>
+                        <ul class="colecciones">
+                        <li class="has-sub cateoria"><a href="categoria.php"><span>Categoría</span></a></li>
+                        <li class="has-sub cateoria"><a href="coleccion.php"><span>Colección</span></a></li>
                         </ul>
                     </li>
-                    <li class="list-item"><a href="#"><span>Modificar & Eliminar</span></a>
+                    <li class="list-item"><a href="#"><span>Productos</span></a>
                         <ul class="colecciones">
-                        <li class="has-sub cateoria"><a href="modificarProducto.php"><span>Producto</span></a></li>
-                        <li class="has-sub cateoria"><a href="modificarCupon.php"><span>Cupón</span></a></li>
-                        <li class="has-sub cateoria"><a href="CatalogoAccesories.php"><span>...</span></a></li>
+                        <li class="has-sub cateoria"><a href="modificarProducto.php"><span>Agregar Producto</span></a></li>
+                        <li class="has-sub cateoria"><a href="modificarCupon.php"><span>Modificar producto</span></a></li>
+                        <li class="has-sub cateoria"><a href="CatalogoAccesories.php"><span>Stock</span></a></li>
+                        <li class="has-sub cateoria"><a href="CatalogoAccesories.php"><span>Imágenes</span></a></li>
+                        <li class="has-sub cateoria"><a href="CatalogoAccesories.php"><span>Tallas</span></a></li>
                         </ul>
                     </li>
                     <li class="list-item"><a href="masVendidos.php"><span>Más vendidos</span></a>

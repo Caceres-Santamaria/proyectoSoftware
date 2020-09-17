@@ -8,7 +8,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agrega Cupón</title>
+    <title>Cupones</title>
     <link rel="stylesheet" href="../static/estilos/general.css">
     <script src="../static/validaciones/valida.js"></script>
     <script src="../static/validaciones/jquery.min.js"></script>
@@ -31,18 +31,18 @@ session_start();
                 <caption>
                     <h3>Agregar Cupón</h3>
                 </caption>
-                <form method="POST" action="../funciones/registrar_ciudad.php">
+                <form method="POST" action="../funciones/.php">
                     <tr id="tabla-encabezado">
                         <td colspan="2" align="center">
-                            <img src="../static/imagenes/cupon.png" width="150px" onsubmit="return valida_longitud30('nombre') && valida_longitud20('paginaweb') && validar_telefono() && validar_combos('ciudad')">
+                            <img src="../static/imagenes/cupon.png" width="150px">
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            Identificador:*
+                            Nombre cupón:*
                         </td>
                         <td>
-                            <input type="number" name="id" id="id" title="id" onkeypress="return validar_numeros(event)" onclick="noNegativo('id')" required placeholder="Escriba el identificador" />
+                            <input type="text" name="id" id="id" title="Nombre del cupón"  required placeholder="Nombre del cupón" />
                         </td>
                     </tr>
                     <tr>
@@ -50,7 +50,7 @@ session_start();
                             Porcentaje de descuento:*
                         </td>
                         <td>
-                            <input type="number" name="costo" id="costo" title="costo" onkeypress="return validar_numeros(event)" onclick="noNegativo('costo')" required placeholder="costo domicilio" />
+                            <input type="number" name="costo" id="costo" title="costo" onkeypress="return validar_numeros(event)" onclick="noNegativo('costo')" required placeholder="descuento" />
                         </td>
                     </tr>
                     <tr>
@@ -67,13 +67,14 @@ session_start();
                     <h3>Listado de Cupones</h3>
                 </caption>
                 <tr align=center id="tabla-encabezado">
-                    <th>ID</th>
+                    <th>CUPÓN</th>
                     <th>%DESCUENTO</th>
                     <th>ELIMINAR</th>
+                    <th>MODIFICAR</th>
                 </tr>
                 <?PHP
                 $cons = new Metodos();
-                $sql = "select * from ciudad";
+                $sql = "select * from cupon";
                 $result = $cons->Consulta($sql);
                 foreach ($result as $row) {
                 ?>
@@ -83,6 +84,11 @@ session_start();
                         <td>
                             <button type="button" onclick="eliminaCiu( '<?php echo $row[0] ?>')" class="boton-modifica-proveedor bt-eliminar">
                                 <img src="../static/imagenes/eliminar.png" height="30px" width="30px" alt="">
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" id="modifica" onclick="modifica( '<?php echo $row['id_producto'] ?>','modificarProducto.php',4)" class="boton-modifica-proveedor bt-modificar">
+                                <img id="img" src="../static/imagenes/modificar.png" height="30px" width="30px" alt="">
                             </button>
                         </td>
                     </tr>
