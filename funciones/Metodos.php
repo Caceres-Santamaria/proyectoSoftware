@@ -368,7 +368,7 @@ class Metodos
     {
         $cnx = new conexionDB();
         $conn = $cnx->getConexion();
-        $query = "select p.referencia,p.nombre,(select t.nombre from talla as t where t.id_talla=d.id_talla),d.existencia from producto as p inner join talla_producto as d on p.referencia = d.referencia where p.referencia='$ref' order by d.existencia asc";
+        $query = "select p.referencia,p.nombre,(select t.nombre from talla as t where t.id_talla=d.id_talla),d.existencia,d.id_talla from producto as p inner join talla_producto as d on p.referencia = d.referencia where p.referencia='$ref' order by d.existencia asc";
         //"select a.id_pedido,a.direccion, a.hora,a.descripcion, (select costo from domicilio where a.id_domicilio=id_domicilio) as domi,(select primer_nombre ||' '||primer_apellido from cliente where a.id_cliente=identificacion) as cliente, a.nro_seguimiento, (select nombre from empresa_envio where a.id_empresa_envio=id_empresa_envio) as empresa_envio, (select nombre from estado_pedido where a.id_estado=id_estado) as estado,a.persona,a.telefono,a.fecha from pedido as a where a.id_estado = '01'";
         $list = [];
         foreach ($conn->query($query) as $row) {
@@ -380,7 +380,7 @@ class Metodos
     {
         $cnx = new conexionDB();
         $conn = $cnx->getConexion();
-        $query = "select p.referencia,p.nombre,(select t.nombre from talla as t where t.id_talla=d.id_talla),d.existencia from producto as p inner join talla_producto as d on p.referencia = d.referencia order by d.existencia asc";
+        $query = "select p.referencia,p.nombre,(select t.nombre from talla as t where t.id_talla=d.id_talla),d.existencia,d.id_talla from producto as p inner join talla_producto as d on p.referencia = d.referencia order by d.existencia asc";
         //"select a.id_pedido,a.direccion, a.hora,a.descripcion, (select costo from domicilio where a.id_domicilio=id_domicilio) as domi,(select primer_nombre ||' '||primer_apellido from cliente where a.id_cliente=identificacion) as cliente, a.nro_seguimiento, (select nombre from empresa_envio where a.id_empresa_envio=id_empresa_envio) as empresa_envio, (select nombre from estado_pedido where a.id_estado=id_estado) as estado,a.persona,a.telefono,a.fecha from pedido as a where a.id_estado = '01'";
         $list = [];
         foreach ($conn->query($query) as $row) {

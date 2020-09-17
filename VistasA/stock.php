@@ -74,9 +74,9 @@ $cons = new Metodos();
                         <td><?php echo $row[0] ?></td>
                         <td><?php echo $row[1] ?></td>
                         <td><?php echo $row[2] ?></td>
-                        <td><?php echo $row[3] ?></td>
+                        <td><input type="number" name="<?php echo $row[0].$row[4] ?>" id="<?php echo $row[0].$row[4] ?>" value="<?php echo $row[3] ?>"></td>
                         <td>
-                            <button type="button" id="modifica" onclick="modifica( '<?php echo $row['id_producto'] ?>','modificarProducto.php',4)" class="boton-modifica-proveedor bt-modificar">
+                            <button type="button" id="modifica" onclick="modificaT('<?php echo $row[0] ?>','<?php echo $row[4] ?>')" class="boton-modifica-proveedor bt-modificar">
                                 <img id="img" src="../static/imagenes/modificar.png" height="30px" width="30px" alt="">
                             </button>
                         </td>

@@ -66,7 +66,7 @@ session_start();
                         <td><?php echo number_format($row[9],1) ?></td>
                         <td><?php echo $row[10] ?></td>
                         <td>
-                            <button type="button" id="modifica" onclick="modifica( '<?php echo $row['id_pedido'] ?>','pedidos.php',3)" class="boton-modifica-proveedor">
+                            <button type="button" id="modifica" onclick="modifica( '<?php echo $row[0] ?>','pedidos.php',5)" class="boton-modifica-proveedor">
                                 <img id="img" src="../static/imagenes/modificar.png" height="30px" width="30px" alt="">
                             </button>
                         </td>

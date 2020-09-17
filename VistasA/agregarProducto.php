@@ -33,7 +33,7 @@ session_start();
                     <h3>Agregar producto</h3>
                 </caption>
                 <tbody>
-                    <form method="POST" action="../funciones/registrar_producto.php" onsubmit="return validar_longitud3('id') && validar_longitud40('nombre') && validar_longitud100('descripcion') && validar_longitud30('imagen')&& validar_combos('tipo')&&validar_combos('subcategoria')">
+                    <form method="POST" action="../funciones/registrar.php?elemento=producto" onsubmit="return validar_longitud3('id') && validar_longitud40('nombre') && validar_longitud100('descripcion') && validar_longitud30('imagen')&& validar_combos('tipo')&&validar_combos('subcategoria')">
                         <tr id="tabla-encabezado"">
                             <td colspan=" 2" align="center">
                             <img src="../static/imagenes/slider2.jpg" width="300px" class="img-prod">
@@ -44,7 +44,7 @@ session_start();
                                 Referencia:*
                             </td>
                             <td>
-                                <input type="text" name="idprod" id="id" title="id" onkeypress="return validar_numeros(event)" required placeholder="Escriba el id del producto" />
+                                <input type="text" name="referencia" id="referencia" title="id" required placeholder="Referencia del producto" />
                             </td>
                         </tr>
                         <tr>
@@ -68,7 +68,7 @@ session_start();
                                 Valor de venta:*
                             </td>
                             <td>
-                                <input type="number" name="valorventa" id="valor" title="valor" onclick="noNegativo('valor')" onkeypress="return valida_numeros(event)" required placeholder="Escriba el valor de venta" />
+                                <input type="number" name="costo" id="costo" title="costo" onclick="noNegativo('valor')" onkeypress="return valida_numeros(event)" required placeholder="Escriba el valor de venta" />
                             </td>
                         </tr>
                         <tr>
@@ -76,7 +76,7 @@ session_start();
                                 Categoría:*
                             </td>
                             <td>
-                                <select name="combo1" id="tipo" title="tipo">
+                                <select name="categoria" id="categoria" title="categoria">
                                     <option value="vacio">...</option>
                                     <?PHP
                                     $sql = "select a.id_clasficacion,a.nombre from clasificacion as a inner join categoria as b on a.id_clasficacion = b.id_categoria";
@@ -93,7 +93,7 @@ session_start();
                                 Colección:*
                             </td>
                             <td>
-                                <select name="combo2" id="subcategoria" title="subcategoria">
+                                <select name="coleccion" id="coleccion" title="coleccion">
                                     <option value="vacio">...</option>
                                     <?PHP
                                     $sql = "select a.id_clasficacion,a.nombre from clasificacion as a inner join coleccion as b on a.id_clasficacion = b.id_coleccion";

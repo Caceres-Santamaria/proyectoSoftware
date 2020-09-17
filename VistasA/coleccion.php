@@ -31,7 +31,7 @@ session_start();
                 <caption>
                     <h3>Agregar Colección</h3>
                 </caption>
-                <form method="POST" action="../funciones/.php">
+                <form method="POST" action="../funciones/registrar.php?elemento=coleccion">
                     <tr id="tabla-encabezado">
                         <td colspan="2" align="center">
                             <img src="../static/imagenes/coleccion.png" width="250px">
@@ -50,7 +50,7 @@ session_start();
                             fecha:*
                         </td>
                         <td>
-                        <input type="text" name="fecha" id="fecha" title="fecha coleccion"  required placeholder="fecha colección"/>
+                        <input type="date" name="fecha" id="fecha" title="fecha coleccion"  required placeholder="fecha colección"/>
                         </td>
                     </tr>
                     <tr>
@@ -96,12 +96,12 @@ session_start();
                         <td><?php echo $row[3] ?></td>
                         <td><img src="../static/imagenes/<?php echo $row[3] ?>" alt="<?php echo $row[1] ?>" width="120px"></td>
                         <td>
-                            <button type="button" onclick="eliminaCiu( '<?php echo $row[0] ?>')" class="boton-modifica-proveedor bt-eliminar">
+                            <button type="button" onclick="elimina('<?php echo $row[0] ?>','coleccion','coleccion.php')" class="boton-modifica-proveedor bt-eliminar">
                                 <img src="../static/imagenes/eliminar.png" height="30px" width="30px" alt="">
                             </button>
                         </td>
                         <td>
-                            <button type="button" id="modifica" onclick="modifica( '<?php echo $row['id_producto'] ?>','modificarProducto.php',4)" class="boton-modifica-proveedor bt-modificar">
+                            <button type="button" id="modifica" onclick="modifica( '<?php echo $row[0] ?>','coleccion.php',3)" class="boton-modifica-proveedor bt-modificar">
                                 <img id="img" src="../static/imagenes/modificar.png" height="30px" width="30px" alt="">
                             </button>
                         </td>

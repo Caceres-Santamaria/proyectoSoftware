@@ -31,7 +31,7 @@ session_start();
                 <caption>
                     <h3>Agregar Categoría</h3>
                 </caption>
-                <form method="POST" action="../funciones/.php">
+                <form method="POST" action="../funciones/registrar.php?elemento=categoria">
                     <tr id="tabla-encabezado">
                         <td colspan="2" align="center">
                             <img src="../static/imagenes/flamma.png" width="250px">
@@ -86,12 +86,12 @@ session_start();
                         <td><?php echo $row[2] ?></td>
                         <td><img src="../static/imagenes/<?php echo $row[2] ?>" alt="<?php echo $row[1] ?>" width="120px"></td>
                         <td>
-                            <button type="button" onclick="eliminaCiu( '<?php echo $row[0] ?>')" class="boton-modifica-proveedor bt-eliminar">
+                            <button type="button" onclick="elimina('<?php echo $row[0] ?>','categoria','categoria.php')" class="boton-modifica-proveedor bt-eliminar">
                                 <img src="../static/imagenes/eliminar.png" height="30px" width="30px" alt="">
                             </button>
                         </td>
                         <td>
-                            <button type="button" id="modifica" onclick="modifica( '<?php echo $row['id_producto'] ?>','modificarProducto.php',4)" class="boton-modifica-proveedor bt-modificar">
+                            <button type="button" id="modifica" onclick="modifica( '<?php echo $row[0] ?>','categoria.php',2)" class="boton-modifica-proveedor bt-modificar">
                                 <img id="img" src="../static/imagenes/modificar.png" height="30px" width="30px" alt="">
                             </button>
                         </td>

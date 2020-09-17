@@ -34,191 +34,175 @@ $obj = new Metodos();
             <?php
             switch ($cod) {
                 case 1:
-                    $list = $obj->getDatosUsuario($id);
-                    foreach ($list as $row) {
-                        $id = $row["identificacion"];
-                        $pnom = $row["primer_nombre"];
-                        $snom =  $row["segundo_nombre"];
-                        $pap = $row["primer_apellido"];
-                        $sap = $row["segundo_apellido"];
-                        $tel = $row["telefono"];
-                        $dir = $row["direccion"];
-                        $email = $row["email"];
-                        $fechanac = $row["fecha_nacimiento"];
-                        $sexo = $row["sexo"];
-                        $ciu = $row["id_ciudad"];
-                    }
+                    $sql = "select * from cupon where id_cupon = '$id'";
+                    $result = $obj->Consulta($sql);
+                    $row = $result[0];
             ?>
-                    <table style="width: 40%;" cellpadding="10px" class="table table-bordered tabla-proveedor">
-                        <tbody>
-                            <caption>
-                                <h2>Modificar datos</h2>
-                            </caption>
-                            <form method=POST action="../funciones/modifica.php" id="cliente" onsubmit="return validar_cedula() && validar_telefono() && validar_combos('ciudad')">
-                                <tr>
-                                    <td>
-                                        Cedula:*
-                                    </td>
-                                    <td>
-                                        <input type="text" name="cedula" id="cedula" title="cedula" required onkeypress="return validar_numeros(event)" value="<?php echo $id ?>" readonly />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Primer nombre:*
-                                    </td>
-                                    <td>
-                                        <input type="text" name="pnombre" id="pnombre" required title="primer nombre" onblur=" minuscula('pnombre')" value="<?php echo $pnom ?>" onkeypress="return validar_texto(event)" onchange="return validar_longitud_nom('pnombre')" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Segundo nombre:
-                                    </td>
-                                    <td>
-                                        <input type="text" name="snombre" id="snombre" title="segundo nombre" onblur=" minuscula('snombre')" onchange="return validar_longitud_nom('snombre')" onkeypress="return validar_texto(event)" value="<?php echo $snom ?>" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Primer apellido:*
-                                    </td>
-                                    <td>
-                                        <input type="text" name="papellido" id="papellido" title="primer apellido" onblur=" minuscula('papellido')" onchange="return validar_longitud_nom('papellido')" onkeypress="return validar_texto(event)" required value="<?php echo $pap ?>" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Segundo apellido:
-                                    </td>
-                                    <td>
-                                        <input type="text" name="sapellido" id="sapellido" title="segundo apellido" onblur=" minuscula('sapellido')" onchange="return validar_longitud_nom('sapellido')" onkeypress="return validar_texto(event)" value="<?php echo $sap ?>" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Email:*
-                                    </td>
-                                    <td>
-                                        <input type="email" name="email" id="email" title="email" required onchange="return validar_longitud40('email') && validar_email()" value="<?php echo $email ?>" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Dirección:*
-                                    </td>
-                                    <td>
-                                        <input type="text" name="direccion" title="dirección" onchange="return validar_longitud40('direccion')" required value="<?php echo $dir ?>" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Teléfono:*
-                                    </td>
-                                    <td>
-                                        <input type="tel" name="telefono" id="telefono" title="telefono" required onkeypress="return validar_numeros(event)" value="<?php echo $tel ?>" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Fecha de nacimiento:*
-                                    </td>
-                                    <td>
-                                        <input type="date" required name="fecha" id="fecha" title="fecha de nacimiento" onchange="return validar_fecha()" value="<?php echo $fechanac ?>" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Sexo:*
-                                    </td>
-                                    <td class="radio">
-                                        <?php
-                                        switch ($sexo) {
-                                            case 'F':
-                                        ?>
-                                                <input type="radio" class="radio" name="sexo" value="F" title="sexo" style="height:15px;width:50px;" checked>Femenino<br>
-                                                <input type="radio" class="radio" name="sexo" value="M" title="sexo" style="height:15px;width:50px;">Masculino<br>
-                                                <input type="radio" class="radio" name="sexo" value="O" title="sexo" style="height:15px;width:50px;">Otro<br>
-                                            <?php
-                                                break;
-                                            case 'M':
-                                            ?>
-                                                <input type="radio" class="radio" name="sexo" value="F" title="sexo" style="height:15px;width:50px;">Femenino<br>
-                                                <input type="radio" class="radio" name="sexo" value="M" title="sexo" style="height:15px;width:50px;" checked>Masculino<br>
-                                                <input type="radio" class="radio" name="sexo" value="O" title="sexo" style="height:15px;width:50px;">Otro<br>
-                                            <?php
-                                                break;
-                                            case 'O':
-                                            ?>
-                                                <input type="radio" class="radio" name="sexo" value="F" title="sexo" style="height:15px;width:50px;">Femenino<br>
-                                                <input type="radio" class="radio" name="sexo" value="M" title="sexo" style="height:15px;width:50px;">Masculino<br>
-                                                <input type="radio" class="radio" name="sexo" value="O" title="sexo" style="height:15px;width:50px;" checked>Otro<br>
-                                        <?php
-                                                break;
-                                        }
-                                        ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Ciudad:*
-                                    </td>
-                                    <td>
-                                        <select name="ciudad" title="ciudad" id="ciudad">
-                                            <?PHP
-                                            $sql = "select * from ciudad";
-                                            $result1 = pg_query($con, $sql);
-                                            while ($row = pg_fetch_array($result1)) {
-                                                $codigo = $row["id_ciudad"];
-                                                $nombre = $row["nombre_ciudad"];
-                                                if ($codigo == $ciu) {
-                                                    echo "<option value=" . $codigo . " selected>" . $nombre . "</option>";
-                                                } else {
-                                                    echo "<option value=" . $codigo . ">" . $nombre . "</option>";
-                                                }
-                                            }
-                                            ?>
-                                        </select>
-                                        <input type="hidden" name="pagina" value="<?php echo $pagina ?>">
-                                        <input type="hidden" name="cod" value="<?php echo $cod ?>">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td align="center" colspan="2">
-                                        <button type="submit" class="btn bc" class="botmod" name="enviar" value="enviar" onclick="return validateForm(this.form)">Enviar</button>
-                                        <button type="button" class="btn bc" class="botmod" onclick="retro('<?php echo $pagina ?>')" name="retroceder" value="Retroceder">Retroceder</button>
-                                    </td>
-                                </tr>
-                            </form>
-                        </tbody>
+                    <table style="width: 40%; background:white;" cellpadding="10px" class="table table-bordered tabla-proveedor">
+                        <caption>
+                            <h3>Actualizar Cupón</h3>
+                        </caption>
+                        <form method="POST" action="../funciones/actualizar.php?elemento=cupon">
+                            <tr id="tabla-encabezado">
+                                <td colspan="2" align="center">
+                                    <img src="../static/imagenes/cupon.png" width="150px">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Nombre cupón:*
+                                </td>
+                                <td>
+                                    <input type="text" name="nombre" id="nombre" title="Nombre del cupón" required placeholder="Nombre del cupón" value="<?php echo $row[0]; ?>" readonly />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Porcentaje de descuento:*
+                                </td>
+                                <td>
+                                    <input type="text" name="costo" id="costo" title="costo" onclick="noNegativo('costo')" required placeholder="descuento" value="<?php echo $row[1]; ?>" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center" colspan="2">
+                                    <button type="submit" class="btn bc" class="botmod" name="enviar" value="Actualizar" onclick="return validateForm(this.form)">Actualizar</button>
+                                    <button type="button" class="btn bc" class="botmod" onclick="retro('<?php echo $pagina ?>')" name="retroceder" value="Retroceder">Retroceder</button>
+                                </td>
+                            </tr>
+                        </form>
                     </table>
                 <?PHP
                     break;
                 case 2:
-                    $id = $id . "";
-                    $sql = "select *  from empresa_envio where id_empresa_envio='" . $id . "'";
-                    $list = $obj->Consulta($sql);
-                    foreach ($list as $row) {
-                        $id = $row["id_empresa_envio"];
-                        $nom = $row["nombre"];
-                        $tel = $row["telefono"];
-                        $dir = $row["direccion"];
-                        $email = $row["email"];
-                        $pagweb = $row["pagina_web"];
-                    }
+                    $sql = "select  a.id_clasficacion,a.nombre,a.imagen from clasificacion as a inner join categoria as b on a.id_clasficacion = b.id_categoria where b.id_categoria=$id";
+                    $result = $obj->Consulta($sql);
+                    $row = $result[0];
                 ?>
-                    <table style="width: 40%;" cellpadding="10px" class="table table-bordered tabla-proveedor">
+                    <table style="width: 40%; background:white;" cellpadding="10px" class="table table-bordered tabla-proveedor">
+                        <caption>
+                            <h3>Modificar Categoría</h3>
+                        </caption>
+                        <form method="POST" action="../funciones/actualizar.php?elemento=categoria">
+                            <tr id="tabla-encabezado">
+                                <td colspan="2" align="center">
+                                    <img src="../static/imagenes/<?php echo $row[2]; ?>" width="250px">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Id categoría:*
+                                </td>
+                                <td>
+                                    <input type="number" name="idC" id="idC" title="Id categoría" required placeholder="Nombre categoría" value="<?php echo $row[0]; ?>" readonly />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Nombre categoría:*
+                                </td>
+                                <td>
+                                    <input type="text" name="nombre" id="nombre" title="Nombre categoría" required placeholder="Nombre categoría" value="<?php echo $row[1]; ?>" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Imágen:*
+                                </td>
+                                <td>
+                                    <input type="text" name="imagen" id="imagen" title="imagen categoría" required placeholder="nombre de la imagen" value="<?php echo $row[2]; ?>" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center" colspan="2">
+                                    <button type="submit" class="btn bc" class="botmod" name="enviar" value="Actualizar" onclick="return validateForm(this.form)">Actualizar</button>
+                                    <button type="button" class="btn bc" class="botmod" onclick="retro('<?php echo $pagina ?>')" name="retroceder" value="Retroceder">Retroceder</button>
+                                </td>
+                            </tr>
+                        </form>
+                    </table>
+                <?PHP
+                    break;
+                case 3:
+                    $sql = "select  a.id_clasficacion,a.nombre,b.fecha,a.imagen from clasificacion as a inner join coleccion as b on a.id_clasficacion = b.id_coleccion where b.id_coleccion=$id";
+                    $result = $obj->Consulta($sql);
+                    $row = $result[0];
+                ?>
+                    <table style="width: 40%; background:white;" cellpadding="10px" class="table table-bordered tabla-proveedor">
+                        <caption>
+                            <h3>Actualizar Colección</h3>
+                        </caption>
+                        <form method="POST" action="../funciones/actualizar.php?elemento=coleccion">
+                            <tr id="tabla-encabezado">
+                                <td colspan="2" align="center">
+                                    <img src="../static/imagenes/<?php echo $row[3]; ?>" width="250px">
+                                </td>
+                            </tr>
+                            <tr>
+                            <tr>
+                                <td>
+                                    Id Colección:*
+                                </td>
+                                <td>
+                                    <input type="number" name="idC" id="idC" title="Id colección" required placeholder="Id colección" value="<?php echo $row[0]; ?>" readonly />
+                                </td>
+                            </tr>
+                            <td>
+                                Nombre colección:*
+                            </td>
+                            <td>
+                                <input type="text" name="nombre" id="nombre" title="Nombre coleccion" required placeholder="Nombre coleccion" value="<?php echo $row[1]; ?>" />
+                            </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    fecha:*
+                                </td>
+                                <td>
+                                    <input type="date" name="fecha" id="fecha" title="fecha coleccion" required placeholder="fecha colección" value="<?php echo $row[2]; ?>" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Imágen:*
+                                </td>
+                                <td>
+                                    <input type="text" name="imagen" id="imagen" title="imagen coleccion" required placeholder="nombre de la imagen" value="<?php echo $row[3]; ?>" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center" colspan="2">
+                                    <button type="submit" class="btn bc" class="botmod" name="enviar" value="Actualizar" onclick="return validateForm(this.form)">Actualizar</button>
+                                    <button type="button" class="btn bc" class="botmod" onclick="retro('<?php echo $pagina ?>')" name="retroceder" value="Retroceder">Retroceder</button>
+                                </td>
+                            </tr>
+                        </form>
+                    </table>
+                <?PHP
+                    break;
+                case 4:
+                    $sql = "select *  from producto where referencia='" . $id . "'";
+                    $result = $obj->Consulta($sql);
+                    $row = $result[0];
+                    $image = $obj->getImagenes($row[0]);
+                ?>
+                    <table style="width: 40%;" cellpadding="10px" align="center" class="table table-bordered tabla-proveedor">
+                        <caption>
+                            <h3>Actualizar producto</h3>
+                        </caption>
                         <tbody>
-                            <caption>
-                                <h2>Modificar empresa de envio</h2>
-                            </caption>
-                            <form method="POST" action="../funciones/modifica.php" onsubmit="return validar_telefono() && validar_longitud10('id')">
+                            <form method="POST" action="../funciones/actualizar.php?elemento=producto" onsubmit="return validar_longitud3('id') && validar_longitud40('nombre') && validar_longitud100('descripcion') && validar_longitud30('imagen')&& validar_combos('tipo')&&validar_combos('subcategoria')">
+                                <tr id="tabla-encabezado"">
+                            <td colspan=" 2" align="center">
+                                    <img src="../static/imagenes/productos/<?php echo $image[0]; ?>" width="150px" class="img-prod">
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td>
-                                        Id:*
+                                        Referencia:*
                                     </td>
                                     <td>
-                                        <input type="number" name="id" id="id" title="id" required onkeypress="return validar_numeros(event)" onclick="noNegativo('id')" value="<?php echo $id ?>" readonly />
+                                        <input type="text" name="referencia" id="referencia" title="id" required placeholder="Referencia del producto" value="<?php echo $row[0]; ?>" readonly />
                                     </td>
                                 </tr>
                                 <tr>
@@ -226,115 +210,98 @@ $obj = new Metodos();
                                         Nombre:*
                                     </td>
                                     <td>
-                                        <input type="text" name="nombre" id="nombre" required title="nombre" onblur=" minuscula('nombre')" value="<?php echo $nom ?>" onkeypress="return validar_texto(event)" onchange="return validar_longitud_nom('nombre')" />
+                                        <input type="text" name="nombre" id="nombre" title="nombre" onblur=" minuscula('nombre')" onkeypress="return validar_texto(event)" required placeholder="Escriba nombre del producto" value="<?php echo $row[1]; ?>" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        Email:*
+                                        Descripcion del producto:*
                                     </td>
                                     <td>
-                                        <input type="email" name="email" id="email" title="email" onchange="return validar_longitud40('email') && validar_email()" value="<?php echo $email ?>" />
+                                        <textarea name="descripcion" id=descripcion title="descripcion" required><?php echo $row[3]; ?></textarea>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        Dirección:*
+                                        Valor de venta:*
                                     </td>
                                     <td>
-                                        <input type="text" name="direccion" title="dirección" onchange="return validar_longitud40('direccion')" required value="<?php echo $dir ?>" />
+                                        <input type="number" name="costo" id="costo" title="costo" onclick="noNegativo('valor')" onkeypress="return valida_numeros(event)" required placeholder="Escriba el valor de venta" value="<?php echo $row[2]; ?>" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        Teléfono:*
+                                        Categoría:*
                                     </td>
                                     <td>
-                                        <input type="tel" name="telefono" id="telefono" title="telefono" required onkeypress="return validar_numeros(event)" value="<?php echo $tel ?>" />
+                                        <select name="categoria" id="categoria" title="categoria">
+                                            <?PHP
+                                            $sql = "select a.id_clasficacion,a.nombre from clasificacion as a inner join categoria as b on a.id_clasficacion = b.id_categoria";
+                                            $list = $obj->Consulta($sql);
+                                            foreach ($list as $row1) {
+                                                if ($row[4] == $row1[0]) {
+                                                    echo "<option value='$row1[0]' selected>$row1[1]</option>";
+                                                } else {
+                                                    echo "<option value='$row1[0]'>$row1[1]</option>";
+                                                }
+                                            }
+                                            ?>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        Página web:*
+                                        Colección:*
                                     </td>
                                     <td>
-                                        <input type="text" name="paginaweb" id="paginaweb" title=paginaweb onchange="return validar_longitud20('paginaweb')" value="<?php echo $pagweb ?>" />
+                                        <select name="coleccion" id="coleccion" title="coleccion">
+                                            <?PHP
+                                            $sql = "select a.id_clasficacion,a.nombre from clasificacion as a inner join coleccion as b on a.id_clasficacion = b.id_coleccion";
+                                            $list = $obj->Consulta($sql);
+                                            foreach ($list as $row1) {
+                                                if ($row[5] == $row1[0]) {
+                                                    echo "<option value='$row1[0]' selected>$row1[1]</option>";
+                                                } else {
+                                                    echo "<option value='$row1[0]'>$row1[1]</option>";
+                                                }
+                                            }
+                                            ?>
+                                        </select>
                                     </td>
-                                    <input type="hidden" name="pagina" value="<?php echo $pagina ?>">
-                                    <input type="hidden" name="cod" value="<?php echo $cod ?>">
                                 </tr>
                                 <tr>
                                     <td align="center" colspan="2">
-                                        <button type="submit" class="btn bc" class="botmod" name="enviar" value="enviar" onclick="return validateForm(this.form)">Enviar</button>
+                                        <button type="submit" class="btn bc" class="botmod" name="enviar" value="Actualizar" onclick="return validateForm(this.form)">Actualizar</button>
                                         <button type="button" class="btn bc" class="botmod" onclick="retro('<?php echo $pagina ?>')" name="retroceder" value="Retroceder">Retroceder</button>
                                     </td>
                                 </tr>
                             </form>
-                        </tbody>
                     </table>
                 <?PHP
                     break;
-                case 3:
-                    $sql = "select a.id_pedido,a.direccion, a.hora,a.descripcion, (select costo from domicilio where a.id_domicilio=id_domicilio) as domi,(select primer_nombre ||' '||primer_apellido from cliente where a.id_cliente=identificacion) as cliente, a.nro_seguimiento, a.id_empresa_envio, a.id_estado,a.persona,a.telefono,a.fecha from pedido as a where id_pedido=$id";
-                    $list = $obj->Consulta($sql);
-                    foreach ($list as $row) {
-                        $id = $row[0];
-                        $dir = $row[1];
-                        $hora = $row[2];
-                        $descripcion = $row[3];
-                        $domi = $row[4];
-                        $cliente =  $row[5];
-                        $nroseg = $row[6];
-                        $empresaenvio = $row[7];
-                        $estado = $row[8];
-                        $persona = $row[9];
-                        $telefono = $row[10];
-                        $fecha = $row[11];
-                    }
+                case 5:
+                    $sql = "select * from pedido where numero =$id";
+                    $result = $obj->Consulta($sql);
+                    $row = $result[0];
+                    $ciudad = $obj->getCiudad($row[3]);
+                    $departamento = $obj->getDepartamento($row[2]);
                 ?>
                     <table style="width: 40%;" cellpadding="10px" class="table table-bordered tabla-proveedor">
                         <caption>
-                            <h2>Modificar pedido</h2>
+                            <h2>Actualizar pedido</h2>
                         </caption>
-                        <form method=POST action="../funciones/modifica.php" id="pedido" onsubmit="return validar_combos('domicilio') && validar_combos('cliente') && validar_combos('empresaenvio') && validar_combos('estado')">
+                        <tr id="tabla-encabezado">
+                            <td colspan="2" align="center">
+                                <img src="../static/imagenes/pedidos.png" width="150px">
+                            </td>
+                        </tr>
+                        <form method=POST action="../funciones/actualizar.php?elemento=pedido" id="pedido" onsubmit="return validar_combos('domicilio') && validar_combos('cliente') && validar_combos('empresaenvio') && validar_combos('estado')">
                             <tr>
                                 <td>
-                                    Id del pedido:*
+                                    Número de pedido:*
                                 </td>
                                 <td>
-                                    <input type="text" name="pedidoId" id="idped" title="idpedido" required onclick="noNegativo('id')" onkeypress="return validar_numeros(event)" value="<?php echo $row[0] ?>" readonly />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Dirección de envío:*
-                                </td>
-                                <td>
-                                    <input type="text" disabled id="direccion" title="direccion" onchange="return validar_longitud40('direccion')" required value="<?php echo $dir ?>" readonly />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Hora pedido:*
-                                </td>
-                                <td>
-                                    <input type="time" disabled id="hora" title="hora" required value="<?php echo $hora ?>" readonly />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Descripción:
-                                </td>
-                                <td>
-                                    <textarea disabled id="descripcion" title="descripcion" onchange="return validar_longitud100('direccion')" name="descripcion" readonly><?php echo $descripcion ?></textarea>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Costo:*
-                                </td>
-                                <td>
-                                    <input type="text" disabled id="costo" title="costo" required value="<?php echo "$ " . $domi; ?>" readonly />
+                                    <input type="text" name="pedidoId" id="idped" title="idpedido" required value="<?php echo $row[0] ?>" readonly />
                                 </td>
                             </tr>
                             <tr>
@@ -342,7 +309,47 @@ $obj = new Metodos();
                                     Cliente:*
                                 </td>
                                 <td>
-                                    <input type="text" disabled id="cliente" title="cliente" required value="<?php echo $cliente ?>" readonly />
+                                    <input type="text" disabled id="cliente" title="cliente" required value="<?php echo $row[1] ?>" readonly />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Departamento:*
+                                </td>
+                                <td>
+                                    <input type="text" disabled id="departamento" title="departamento" required value="<?php echo $departamento[0][1] ?>" readonly />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Ciudad:*
+                                </td>
+                                <td>
+                                    <input type="text" disabled id="ciudad" title="ciudad" required value="<?php echo $ciudad[0][2] ?>" readonly />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Dirección de envío:*
+                                </td>
+                                <td>
+                                    <input type="text" disabled id="direccione" title="direccion" required value="<?php echo $row[4] ?>" readonly />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Especificacion:*
+                                </td>
+                                <td>
+                                    <input type="text" disabled id="especificacion" title="especificacion" required value="<?php echo $row[5] ?>" readonly />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Teléfono:
+                                </td>
+                                <td>
+                                    <input type="number" id="tel" title="teléfono" value="<?php echo $row[6] ?>" readonly disabled />
                                 </td>
                             </tr>
                             <tr>
@@ -350,29 +357,7 @@ $obj = new Metodos();
                                     Número de seguimiento:
                                 </td>
                                 <td>
-                                    <input type="number" name="nroseg" id="nroseg" title="nroseg" onclick="noNegativo('nroseg')" onchange="return validar_longitud20('direccion')" value="<?php echo $nroseg ?>" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Empresa de envío:*
-                                </td>
-                                <td>
-                                    <select name="empresaenvio" id="empresaenvio" title="empresaenvio">
-                                        <?PHP
-                                        $sql = "select * from empresa_envio";
-                                        $list = $obj->Consulta($sql);
-                                        foreach ($list as $row) {
-                                            $id = $row["id_empresa_envio"];
-                                            $nombre = $row["nombre"];
-                                            if ($id == $empresaenvio) {
-                                                echo "<option value=" . $id . " selected>" . $nombre . "</option>";
-                                            } else {
-                                                echo "<option value=" . $id . ">" . $nombre . "</option>";
-                                            }
-                                        }
-                                        ?>
-                                    </select>
+                                    <input type="text" name="nroseg" id="nroseg" title="nroseg" onchange="return validar_longitud20('direccion')" value="<?php echo $row[7] ?>" />
                                 </td>
                             </tr>
                             <tr>
@@ -382,34 +367,23 @@ $obj = new Metodos();
                                 <td>
                                     <select name="estado" id="estado" title="estado">
                                         <?PHP
-                                        $sql = "select * from estado_pedido";
-                                        $list = $obj->Consulta($sql);
-                                        foreach ($list as $row) {
-                                            $ides = $row["id_estado"];
-                                            $nombre = $row["nombre"];
-                                            if ($ides == $estado) {
-                                                echo "<option value=" . $ides . " selected>" . $nombre . "</option>";
-                                            } else {
-                                                echo "<option value=" . $ides . ">" . $nombre . "</option>";
-                                            }
+                                        if ($row[8] == 'no enviado') {
+                                            echo "<option value='no enviado' selected>no enviado</option>";
+                                            echo "<option value='enviado' >enviado</option>";
+                                        } else {
+                                            echo "<option value='no enviado' >no enviado</option>";
+                                            echo "<option value='enviado' selected >enviado</option>";
                                         }
                                         ?>
                                     </select>
                                 </td>
-                            <tr>
-                                <td>
-                                    Persona:
-                                </td>
-                                <td>
-                                    <input type="text" id="persona" title="persona" value="<?php echo $persona ?>" readonly disabled />
-                                </td>
                             </tr>
                             <tr>
                                 <td>
-                                    Teléfono:
+                                    Descuento:*
                                 </td>
                                 <td>
-                                    <input type="number" id="tel" title="teléfono" value="<?php echo $telefono ?>" readonly disabled />
+                                    <input type="text" disabled id="costo" title="costo" required value="<?php echo "$ " . $row[9]; ?>" readonly />
                                 </td>
                             </tr>
                             <tr>
@@ -417,7 +391,7 @@ $obj = new Metodos();
                                     Fecha:
                                 </td>
                                 <td>
-                                    <input type="date" id="fecfa" title="fecfa" value="<?php echo $fecha ?>" readonly disabled />
+                                    <input type="date" id="fecfa" title="fecfa" value="<?php echo $row[10] ?>" readonly disabled />
                                     <input type="hidden" name="pagina" value="<?php echo $pagina ?>">
                                     <input type="hidden" name="cod" value="<?php echo $cod ?>">
                                 </td>
@@ -433,257 +407,44 @@ $obj = new Metodos();
                     </table>
                 <?PHP
                     break;
-                case 4:
-                    $sql = "select *  from producto where id_producto='" . $id . "'";
-                    $list = $obj->Consulta($sql);
-                    foreach ($list as $row) {
-                        $id = $row[0];
-                        $nom = $row[1];
-                        $existencia =  $row["existencia"];
-                        $descripcion = $row["descripcion"];
-                        $valorventa = $row["valor_venta"];
-                        $imagen = $row["imagen"];
-                        $subcategoria = $row["id_subcategoria"];
-                        $tipo = $row["id_tipo_producto"];
-                        $simg = $row["segunda_imagen"];
-                    }
+                case 6:
+                    $sql = "select  * from talla where id_talla=$id";
+                    $result = $obj->Consulta($sql);
+                    $row = $result[0];
                 ?>
-                    <table style="width: 40%;" cellpadding="10px" class="table table-bordered tabla-proveedor">
-                        <tbody>
-                            <caption>
-                                <h2>Modificar producto</h2>
-                            </caption>
-                            <form method=POST action="../funciones/modifica.php" id="producto" onsubmit="return validar_longitud3('id') && validar_longitud40('nombre') && validar_longitud100('descripcion') && validar_longitud30('imagen')&& validar_combos('tipo')&&validar_combos('subcategoria')">
-                                <tr>
-                                    <td>
-                                        Id producto:*
-                                    </td>
-                                    <td>
-                                        <input type="text" name="idprod" id="idprod" title="idprod" onkeypress="return validar_numeros(event)" required value="<?php echo $id ?>" readonly />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Nombre:*
-                                    </td>
-                                    <td>
-                                        <input type="text" name="nombre" id="nombre" title="nombre" onblur=" minuscula('nombre')" required value="<?php echo $nom ?>" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Imágen:*
-                                    </td>
-                                    <td>
-                                        <input type="text" name="imagen" id="imagen" title="imagen" required value="<?php echo $imagen ?>" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Segunda imágen:*
-                                    </td>
-                                    <td>
-                                        <input type="text" name="simagen" id="simagen" title="simagen" value="<?php echo $simg ?>" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Descripcion del producto:*
-                                    </td>
-                                    <td>
-                                        <input type="text" name="descripcion" id=descripcion title="descripcion" value="<?php echo $descripcion ?>" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Valor de venta:*
-                                    </td>
-                                    <td>
-                                        <input type="number" name="valorventa" id="valorventa" title="valor" onclick="noNegativo('valor')" onkeypress="return valida_numeros(event)" required value="<?php echo $valorventa ?>" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Existencia:*
-                                    </td>
-                                    <td>
-                                        <input type="number" name="existencia" id="existencia" onclick="noNegativo('existencia')" onkeypress="return valida_numeros(event)" title="existencia" required value="<?php echo $existencia ?>" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Tipo de producto:*
-                                    </td>
-                                    <td>
-                                        <select name="tipo" id="tipo" title="tipo">
-                                            <?PHP
-                                            $sql = "select * from tipo_producto";
-                                            $list = $obj->Consulta($sql);
-                                            foreach ($list as $row) {
-                                                $idtipo = $row["id_tipo_producto"];
-                                                $nombre = $row["nombre"];
-                                                if ($idtipo == $tipo) {
-                                                    echo "<option value=" . $idtipo . " selected>" . $nombre . "</option>";
-                                                } else {
-                                                    echo "<option value=" . $idtipo . ">" . $nombre . "</option>";
-                                                }
-                                            }
-                                            ?>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Subcategoria de producto:*
-                                    </td>
-                                    <td>
-                                        <select name="subcategoria" id="subcategoria" title="subcategoria">
-                                            <?PHP
-                                            $sql = "select * from subcategoria_producto";
-                                            $list = $obj->Consulta($sql);
-                                            foreach ($list as $row) {
-                                                $idsub = $row["id_subcategoria"];
-                                                $nombre = $row["nombre"];
-                                                if ($idsub == $subcategoria) {
-                                                    echo "<option value=" . $idsub . " selected>" . $nombre . "</option>";
-                                                } else {
-                                                    echo "<option value=" . $idsub . ">" . $nombre . "</option>";
-                                                }
-                                            }
-                                            ?>
-                                        </select>
-                                    </td>
-                                    <input type="hidden" name="pagina" value="<?php echo $pagina ?>">
-                                    <input type="hidden" name="cod" value="<?php echo $cod ?>">
-                                </tr>
-                                <tr>
-                                    <td align="center" colspan="2">
-                                        <button type="submit" class="btn bc" class="botmod" name="enviar" value="enviar" onclick="return validateForm(this.form)">Enviar</button>
-                                        <button type="button" class="btn bc" class="botmod" onclick="retro('<?php echo $pagina ?>')" name="retroceder" value="Retroceder">Retroceder</button>
-                                    </td>
-                                </tr>
-                            </form>
-                        </tbody>
-                    </table>
-                <?PHP
-                    break;
-                case 5:
-                    $sql = "select *  from proveedor where identificacion=$id";
-                    $list = $obj->Consulta($sql);
-                    foreach ($list as $row) {
-                        $id = $row["identificacion"];
-                        $nom = $row["nombre"];
-                        $email = $row["email"];
-                        $dir = $row["direccion"];
-                        $tel = $row["telefono"];
-                        $ciu = $row["id_ciudad"];
-                        $paginaweb =  $row["pagina_web"];
-                        $nrocuenta = $row["nro_cuenta"];
-                        $entidadbancaria = $row["entidad_bancaria"];
-                    }
-                ?>
-                    <table style="width: 40%;" cellpadding="10px" class="table table-bordered tabla-proveedor">
-                        <tbody>
-                            <caption>
-                                <h2>Modificar proveedor</h2>
-                            </caption>
-                            <form method=POST action="../funciones/modifica.php" id="proveedor" onsubmit="return validar_telefono() && validar_combos('ciudad')">
-                                <tr>
-                                    <td>
-                                        Identificación:*
-                                    </td>
-                                    <td>
-                                        <input type="number" name="id" id="id" title="id" onkeypress="return valida_numeros(event)" onclick="noNegativo('id')" required value="<?php echo $id ?>" readonly />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Nombre:*
-                                    </td>
-                                    <td>
-                                        <input type="text" name="nombre" id="nombre" title="nombre" onblur=" minuscula('nombre')" onkeypress="return validar_texto(event)" required value="<?php echo $nom ?>" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Pagina web:
-                                    </td>
-                                    <td>
-                                        <input type="text" name="pagweb" id="paginaweb" title="paginaweb" value="<?php echo $paginaweb ?>" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Email:
-                                    </td>
-                                    <td>
-                                        <input type="email" name="email" id="email" title="email" onchange="return validar_email() && validar_longitud40('email')" value="<?php echo $email ?>" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Dirección:
-                                    </td>
-                                    <td>
-                                        <input type="text" name="direccion" id="direccion" title="direccion" onchange="return validar_longitud40('direccion')" value="<?php echo $dir ?>" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Teléfono:*
-                                    </td>
-                                    <td>
-                                        <input type="tel" name="telefono" id="telefono" title="telefono" onkeypress="return validar_numeros(event)" required value="<?php echo $tel ?>" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Entidad bancaria:
-                                    </td>
-                                    <td>
-                                        <input type="text" name="ebancaria" id="ebancaria" title="ebancaria" onblur=" minuscula('ebancaria')" onkeypress="return validar_texto(event)" onchange="return validar_longitud('ebancaria')" value="<?php echo $entidadbancaria ?>" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Número de cuenta:
-                                    </td>
-                                    <td>
-                                        <input type="number" name="nrocuenta" id="nrocuenta" title="nrocuenta" onkeypress="return valida_numeros(event)" onclick="noNegativo('nrocuenta')" value="<?php echo $nrocuenta ?>" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Ciudad:*
-                                    </td>
-                                    <td>
-                                        <select name="ciudad" title="ciudad" id="ciudad">
-                                            <?PHP
-                                            $sql = "select * from ciudad";
-                                            $list = $obj->Consulta($sql);
-                                            foreach ($list as $row) {
-                                                $codigo = $row["id_ciudad"];
-                                                $nombre = $row["nombre_ciudad"];
-                                                if ($codigo == $ciu) {
-                                                    echo "<option value=" . $codigo . " selected>" . $nombre . "</option>";
-                                                } else {
-                                                    echo "<option value=" . $codigo . ">" . $nombre . "</option>";
-                                                }
-                                            }
-                                            ?>
-                                        </select>
-                                    </td>
-                                    <input type="hidden" name="pagina" value="<?php echo $pagina ?>">
-                                    <input type="hidden" name="cod" value="<?php echo $cod ?>">
-                                </tr>
-                                <tr>
-                                    <td align="center" colspan="2">
-                                        <button type="submit" class="btn bc" class="botmod" name="enviar" value="enviar" onclick="return validateForm(this.form)">Enviar</button>
-                                        <button type="button" class="btn bc" class="botmod" onclick="retro('<?php echo $pagina ?>')" name="retroceder" value="Retroceder">Retroceder</button>
-                                    </td>
-                                </tr>
-                            </form>
-                        </tbody>
+                    <table style="width: 40%; background:white;" cellpadding="10px" class="table table-bordered tabla-proveedor">
+                        <caption>
+                            <h3>Agregar Talla</h3>
+                        </caption>
+                        <form method="POST" action="../funciones/actualizar.php?elemento=talla">
+                            <tr id="tabla-encabezado">
+                                <td colspan="2" align="center">
+                                    <img src="../static/imagenes/t-shirt.jpg" width="250px">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Id Talla:*
+                                </td>
+                                <td>
+                                    <input type="number" name="id" id="id" title="Id talla" required placeholder="Nombre talla" value="<?php echo $row[0]; ?>" readonly />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Nombre talla:*
+                                </td>
+                                <td>
+                                    <input type="text" name="talla" id="talla" title="Nombre del talla" required placeholder="Nombre del cupón" value="<?php echo $row[1] ?>" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center" colspan="2">
+                                    <button type="submit" class="btn bc" class="botmod" name="enviar" value="actualizar" onclick="return validateForm(this.form)">Actualizar</button>
+                                    <button type="button" class="btn bc" class="botmod" onclick="retro('<?php echo $pagina ?>')" name="retroceder" value="Retroceder">Retroceder</button>
+                                </td>
+                            </tr>
+                        </form>
                     </table>
             <?PHP
                     break;

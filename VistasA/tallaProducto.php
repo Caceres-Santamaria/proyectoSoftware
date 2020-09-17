@@ -31,7 +31,7 @@ session_start();
                 <caption>
                     <h3>Agregar Talla</h3>
                 </caption>
-                <form method="POST" action="../funciones/.php">
+                <form method="POST" action="../funciones/registrar.php?elemento=talla">
                     <tr id="tabla-encabezado">
                         <td colspan="2" align="center">
                             <img src="../static/imagenes/t-shirt.jpg" width="250px">
@@ -74,12 +74,12 @@ session_start();
                         <td><?php echo $row[0] ?></td>
                         <td><?php echo $row[1] ?></td>
                         <td>
-                            <button type="button" onclick="eliminaCiu( '<?php echo $row[0] ?>')" class="boton-modifica-proveedor bt-eliminar">
+                            <button type="button" onclick="elimina('<?php echo $row[0] ?>','talla','tallaProducto.php')" class="boton-modifica-proveedor bt-eliminar">
                                 <img src="../static/imagenes/eliminar.png" height="30px" width="30px" alt="">
                             </button>
                         </td>
                         <td>
-                            <button type="button" id="modifica" onclick="modifica( '<?php echo $row['id_producto'] ?>','modificarProducto.php',4)" class="boton-modifica-proveedor bt-modificar">
+                            <button type="button" id="modifica" onclick="modifica( '<?php echo $row[0] ?>','tallaProducto.php',6)" class="boton-modifica-proveedor bt-modificar">
                                 <img id="img" src="../static/imagenes/modificar.png" height="30px" width="30px" alt="">
                             </button>
                         </td>

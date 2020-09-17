@@ -2,27 +2,26 @@
 include "../funciones/Metodos.php";
 $obj = new Metodos();
 $id = $_REQUEST['id'];
+$elemento = $_REQUEST['elemento'];
 $pagina = $_REQUEST['pagina'];
-$cod = $_REQUEST['cod'];
-switch ($cod) {
-    case 1:
-        $sql = "delete from cliente where identificacion=$id";
+switch ($elemento) {
+    case 'cupon':
+        $sql = "delete from cupon where id_cupon='$id'";
         break;
-    case 2:
-        $id = $id . "";
-        $sql = "delete from empresa_envio where id_empresa_envio='" . $id . "'";
+    case 'categoria':
+        $sql = "delete from categoria where id_categoria=$id";
         break;
-    case 3:
-        $sql = "delete from pedido where id_pedido=$id";
+    case 'coleccion':
+        $sql = "delete from coleccion where id_coleccion=$id";
         break;
-    case 4:
-        $sql = "delete from producto where id_producto='" . $id . "'";
+    case 'producto':
+        $sql = "delete from producto where referencia='" . $id . "'";
         break;
-    case 5:
-        $sql = "delete from proveedor where identificacion=$id";
+    case 'talla':
+        $sql = "delete from talla where id_talla=$id";
         break;
 }
 
 $obj->Actualizar($sql);
-header("location: ../vistasA/$pagina");
+header("location: ../VistasA/$pagina");
 

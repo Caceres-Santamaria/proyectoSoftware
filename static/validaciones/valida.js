@@ -237,12 +237,19 @@ function elimina(id, pagina, cod) {
 }
 
 function modifica(id, pagina, cod) {
-    location.href = "../vistasA/modifica.php?id=" + id + "&pagina=" + pagina + "&cod=" + cod;
+    location.href = "../VistasA/modifica.php?id=" + id + "&pagina=" + pagina + "&cod=" + cod;
+}
+
+function modificaT(id, talla) {
+    var id = "" + id + talla + "";
+    console.log(id);
+    var cantidad = document.getElementById(id).value;
+    location.href = "../funciones/actualizar.php?elemento=stock&referencia=" + id + "&talla=" + talla + "&cantidad=" + cantidad;
 
 }
 
 function retro(pagina) {
-    console.log(pagina);
+    //console.log(pagina);
     location.href = './' + pagina + '';
 }
 
@@ -264,6 +271,6 @@ function maximacantidad(cantidad) {
 
 }
 
-function eliminaCiu(id) {
-    location.href = "../funciones/eliminaCiudad.php?id=" + id;
+function elimina(id, elemento, pagina) {
+    location.href = "../funciones/elimina.php?elemento=" + elemento + "&id=" + id + "&pagina=" + pagina;
 }
