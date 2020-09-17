@@ -31,7 +31,7 @@ session_start();
                 <caption>
                     <h3>Agregar Cupón</h3>
                 </caption>
-                <form method="POST" action="../funciones/.php">
+                <form method="POST" action="../funciones/registrar.php?elemento=cupon">
                     <tr id="tabla-encabezado">
                         <td colspan="2" align="center">
                             <img src="../static/imagenes/cupon.png" width="150px">
@@ -42,7 +42,7 @@ session_start();
                             Nombre cupón:*
                         </td>
                         <td>
-                            <input type="text" name="id" id="id" title="Nombre del cupón"  required placeholder="Nombre del cupón" />
+                            <input type="text" name="nombre" id="nombre" title="Nombre del cupón"  required placeholder="Nombre del cupón" />
                         </td>
                     </tr>
                     <tr>
@@ -50,7 +50,7 @@ session_start();
                             Porcentaje de descuento:*
                         </td>
                         <td>
-                            <input type="number" name="costo" id="costo" title="costo" onkeypress="return validar_numeros(event)" onclick="noNegativo('costo')" required placeholder="descuento" />
+                            <input type="text" name="costo" id="costo" title="costo" onclick="noNegativo('costo')" required placeholder="descuento" />
                         </td>
                     </tr>
                     <tr>

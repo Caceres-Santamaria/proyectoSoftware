@@ -23,7 +23,7 @@ $objMetodo= new Metodos();
     <div class="contenedor">
         <div class="row justify-content-md-center">
             <?php
-            include '../componentes/menu.php';
+            include '../componentes/menuA.php';
             ?>
         </div>
         <main class="content_us">
