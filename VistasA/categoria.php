@@ -62,7 +62,7 @@ session_start();
                 </form>
             </table>
             <br><br>
-            <table class="table table-bordered tabla-proveedor">
+            <table class="table table-bordered tabla-proveedor tabla-scroll">
                 <caption>
                     <h3>Listado de Categorías</h3>
                 </caption>

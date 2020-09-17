@@ -46,7 +46,7 @@ $cons = new Metodos();
                     </td>
                 </tr>
             </table>
-            <table class="table table-bordered tabla-proveedor">
+            <table class="table table-bordered tabla-proveedor tabla-scroll">
                 <caption>
                     <br> <br> <br> <br>
                     <h2>Productos más vendidos</h2>
