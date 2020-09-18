@@ -33,7 +33,7 @@ $tallas = $objMetodo->getTallas($cod);
     <title>Detalle Producto</title>
     <link rel="stylesheet" href="../static/estilos/general.css">
     <script src="../static/validaciones/valida.js"></script>
-    <script src="../static/validaciones/jquery.min.js"></script>
+    <script src="../static/validaciones/jquery-2.2.4.min.js"></script>
     <script src="../static/slider/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../static/estilos/normalize.css">
     <link rel="stylesheet" href="../static/estilos/glider.min.css">
@@ -59,15 +59,11 @@ $tallas = $objMetodo->getTallas($cod);
                                     echo '<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>';
                                     echo '</ol>';
                                     echo '<div class="carousel-inner producto" >';
-                                    $c=true;
-                                    foreach($images as $row)
-                                    {
-                                        if($c)
-                                        {
+                                    $c = true;
+                                    foreach ($images as $row) {
+                                        if ($c) {
                                             echo '<div class="carousel-item active" data-interval="10000">';
-                                        }
-                                        else
-                                        {
+                                        } else {
                                             echo '<div class="carousel-item" data-interval="1000">';
                                         }
                                         $c = false;
@@ -95,67 +91,27 @@ $tallas = $objMetodo->getTallas($cod);
                         <hr>
                         <p class="precioD">Precio: $<?php echo number_format($precio, 0); ?></p>
                         <div class="tallas">
-                        <?php
-                        if(count($tallas)==1)
-                        {
-                            echo '<h4 class="talla">TALLA: <span class="indice-talla">'.$tallas[0][1].'</span></h4>';
-                        }
-                        else{
-                            if(count($tallas)>1)
-                            {
-                                echo '<h4 class="talla">TALLA: <span class="indice-talla">'.$tallas[0][1].'</span></h4>';
-                                echo '<ul class="lista-tallas">';
-                                $c = true;
-                                foreach($tallas as $row)
-                                {
-                                    if($c)
-                                    {
-                                        if($row[2]>1)
-                                        {
-                                            echo '<li class="lista-tallas__talla active"><span data-value="'.$row[0].'" class="spanTalla">'.$row[1].'</span></li>';
-                                        }
-                                        else
-                                        {
-                                            echo '<li class="lista-tallas__talla active"><span data-value="'.$row[0].'" class="spanTalla nExistencia">'.$row[1].'</span></li>';
-                                        }
-                                    }
-                                    else{
-                                        if($row[2]>1)
-                                        {
-                                            echo '<li class="lista-tallas__talla"><span data-value="'.$row[0].'" class="spanTalla">'.$row[1].'</span></li>';
-                                        }
-                                        else
-                                        {
-                                            echo '<li class="lista-tallas__talla"><span data-value="'.$row[0].'" class="spanTalla nExistencia">'.$row[1].'</span></li>';
-                                        }
-                                    }
-                                    $c = false;
-                                }
-                                echo '</ul>';
-                            }
-                        }
-                        ?>
+                            <?php
+                                echo '<h4 class="talla">TALLA: <span class="indice-talla" id="span_talla">' . $tallas[0][1] . '</span></h4>';
+                            ?>
                         </div>
                         <span id="cantidadC" for="cantidad">Cantidad: </span>
                         <form action="" method="post">
-                            <input type="number" name="cantidad" id="cantidadB" min="1" onblur="noNegativo('cantidadB') && maximacantidad(<?php echo $existencia; ?>)" value="1" onclick="noNegativo('cantidadB')">
-                            <input type="hidden" id="codigo" name="codigo" value="<?php echo $cod; ?>">
-                            <select name="talla" id="talla" class="hidden" name="talla">
+                            <select name="talla" id="talla" name="talla">
                                 <?php
                                 $c = true;
-                                foreach($tallas as $row)
-                                {
-                                    if($c)
-                                    {
-                                        echo '<option value="'.$row[0].'" selected="selected" data-value="'.$row[2].'">'.$row[1].'</option>';
-                                    }
-                                    else{
-                                        echo '<option value="'.$row[0].'" data-value="'.$row[2].'">'.$row[1].'</option>';
+                                foreach ($tallas as $row) {
+                                    if ($c) {
+                                        echo '<option value="' . $row[0] . '" selected="selected" data-value="' . $row[2] . '">' . $row[1] . '</option>';
+                                    } else {
+                                        echo '<option value="' . $row[0] . '" data-value="' . $row[2] . '">' . $row[1] . '</option>';
                                     }
                                     $c = false;
                                 }
                                 ?>
                             </select>
+                            <input type="number" name="cantidad" id="cantidadB" min="1" onblur="noNegativo('cantidadB') && maximacantidad(<?php echo $existencia; ?>)" value="1" onclick="noNegativo('cantidadB')">
+                            <input type="hidden" id="codigo" name="codigo" value="<?php echo $cod; ?>">
                             <button type="button" name="btnAction" id="btnAction" value="Agregar" class="btn btn-block boton" onclick="enviarC()"> Agregar Al Carrito</button>
                     </div>
                 </div>
@@ -167,6 +123,53 @@ $tallas = $objMetodo->getTallas($cod);
         include '../funciones/modales.php';
         ?>
     </div>
+    <script>
+        $(document).on("ready", function() {
+            talla();
+            cantidad();
+        });
+
+        function talla() {
+            $("#talla").on("click", function(e) {
+                e.preventDefault();
+                var cupon = document.getElementById('talla').value;
+                var parametros = {
+                    "cupon":cupon
+                };
+                $.ajax({
+                    "method": "POST",
+                    "url": "../funciones/talla.php?id=0",
+                    "data": parametros
+                }).done(function(info) {
+                    $("#span_talla").html(info);
+                });
+            });
+        }
+        function cantidad() {
+            $("#talla").on("click", function(e) {
+                e.preventDefault();
+                var cupon = document.getElementById('talla').value;
+                var prod = document.getElementById('codigo').value;
+                var parametros = {
+                    "cupon":cupon,
+                    "prod":prod
+                };
+                $.ajax({
+                    "method": "POST",
+                    "url": "../funciones/talla.php?id=1",
+                    "data": parametros
+                }).done(function(info) {
+                    if(info == 0)
+                    {
+                        document.getElementById("btnAction").disabled = true;
+                    }
+                    else{
+                        document.getElementById("btnAction").disabled = false;
+                    }
+                });
+            });
+        }
+    </script>
 </body>
 
 </html>

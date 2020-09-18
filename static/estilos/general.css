@@ -27,6 +27,10 @@
     margin-left: 5px;
 }
 
+.lista-tallas__talla:hover {
+    cursor: pointer;
+}
+
 .lista-tallas__talla span {
     color: #000;
     font-size: .8em;
@@ -93,7 +97,8 @@
     transition: .5s !important;
     color: #fff !important;
 }
-.tabla-scroll{
+
+.tabla-scroll {
     max-width: 100% !important;
     max-height: 38rem !important;
     overflow-y: scroll;
@@ -105,12 +110,12 @@
     margin: auto !important;
 }
 
-.tabla-no-enviados{
+.tabla-no-enviados {
     max-width: 100%;
     overflow-x: scroll;
 }
 
-.tabla-busqueda{
+.tabla-busqueda {
     align-content: center !important;
     justify-content: center !important;
     justify-items: center !important;
@@ -537,7 +542,7 @@ section {
     background: #000000;
     border-radius: 10px;
     font-size: 20px;
-    color:#FFF;
+    color: #FFF;
 }
 
 .btn-pedido:hover {
@@ -634,7 +639,7 @@ section {
     background: #000000;
     border-radius: 10px;
     font-size: 20px;
-    color:#FFF;
+    color: #FFF;
     width: 20%;
     height: 2.5rem;
 }
@@ -5720,13 +5725,14 @@ input[type="button"].btn-block {
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
     border-radius: 0.25rem;
-    margin:0 px rem !important;
+    margin: 0 px rem !important;
 }
 
-.col-sm-4{
+.col-sm-4 {
     padding: 0px 4rem;
 }
-.agregar{
+
+.agregar {
     width: 10rem !important;
     align-content: center !important;
     justify-content: center !important;
@@ -5751,8 +5757,8 @@ input[type="button"].btn-block {
     border-bottom-left-radius: 0.25rem;
 }
 
-.tabla-carrito{
-    border:0px solid #fff !important;
+.tabla-carrito {
+    border: 0px solid #fff !important;
 }
 
 .card-body {
@@ -5760,9 +5766,9 @@ input[type="button"].btn-block {
     flex: 1 1 auto;
     min-height: 1px;
     padding: 1.25rem;
-  
 }
-.catalogo{
+
+.catalogo {
     align-content: center !important;
     justify-content: center !important;
     justify-items: center !important;
@@ -7340,16 +7346,20 @@ a.close.disabled {
     padding: 0.5rem 0.75rem;
     color: #212529;
 }
-.slider{
+
+.slider {
     width: 100% !important;
     height: 100%px !important;
 }
+
 .carousel {
     position: relative;
 }
-.carrusel{
+
+.carrusel {
     height: 100% !important;
 }
+
 .carousel.pointer-event {
     -ms-touch-action: pan-y;
     touch-action: pan-y;
@@ -7385,10 +7395,12 @@ a.close.disabled {
     transition: transform 0.6s ease-in-out;
     transition: transform 0.6s ease-in-out, -webkit-transform 0.6s ease-in-out;
 }
-.carousel-item img{
+
+.carousel-item img {
     width: 100%;
     height: 100% !important;
 }
+
 @media (prefers-reduced-motion: reduce) {
     .carousel-item {
         transition: none;

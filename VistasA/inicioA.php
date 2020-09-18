@@ -66,7 +66,7 @@ session_start();
             <div class="containerOverlay">
                 <div class="imgcat">
                     <img src="../static/imagenes/mapa.png" alt="">
-                    <a href="agregarCiudad.php">
+                    <a href="cupon.php">
                         <div class="overlay">
                             <div class="text">
                                 <p>Cupones</p>
