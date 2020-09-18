@@ -227,7 +227,7 @@ function validar_longitud3(nom) {
 function noNegativo(nom) {
     var dato = document.getElementById(nom);
     if (dato.value < 0) {
-        dato.value = 0;
+        dato.value = 1;
     }
 }
 

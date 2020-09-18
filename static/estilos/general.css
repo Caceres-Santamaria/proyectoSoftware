@@ -64,13 +64,13 @@
 }
 
 .img-prod {
-    width: 100%;
+    width: auto;
     height: 50%;
 }
 
 .bc {
-    background: #eb782c !important;
-    border: 1px solid #ff7300 !important;
+    background: #000000 !important;
+    border: 1px solid #000000 !important;
     font-size: 15px !important;
 }
 
@@ -89,13 +89,25 @@
 }
 
 .bc:hover {
-    background: linear-gradient(120deg, #f5b869, #d36002) !important;
+    background: linear-gradient(120deg, #000000, #74706e) !important;
     transition: .5s !important;
+    color: #fff !important;
 }
 .tabla-scroll{
     max-width: 100% !important;
-    max-height: 400px !important;
+    max-height: 38rem !important;
     overflow-y: scroll;
+    align-content: center !important;
+    justify-content: center !important;
+    justify-items: center !important;
+    text-align: center !important;
+    align-items: center !important;
+    margin: auto !important;
+}
+
+.tabla-no-enviados{
+    max-width: 100%;
+    overflow-x: scroll;
 }
 
 .tabla-busqueda{
@@ -106,6 +118,7 @@
     align-items: center !important;
     margin: auto !important;
     width: 20rem !important;
+    margin-bottom: 5rem !important;
 }
 
 .modifica table {
@@ -184,6 +197,7 @@
 
 .carta {
     height: 450px;
+    margin-right: 10rem;
 }
 
 .padin-section {
@@ -5706,6 +5720,20 @@ input[type="button"].btn-block {
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
     border-radius: 0.25rem;
+    margin:0 px rem !important;
+}
+
+.col-sm-4{
+    padding: 0px 4rem;
+}
+.agregar{
+    width: 10rem !important;
+    align-content: center !important;
+    justify-content: center !important;
+    justify-items: center !important;
+    text-align: center !important;
+    align-items: center !important;
+    margin: auto !important;
 }
 
 .card>hr {
@@ -5732,8 +5760,14 @@ input[type="button"].btn-block {
     flex: 1 1 auto;
     min-height: 1px;
     padding: 1.25rem;
-    justify-content: center;
-    align-items: center;
+  
+}
+.catalogo{
+    align-content: center !important;
+    justify-content: center !important;
+    justify-items: center !important;
+    text-align: center !important;
+    align-items: center !important;
 }
 
 .card-title {

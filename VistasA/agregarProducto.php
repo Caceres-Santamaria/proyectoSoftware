@@ -33,8 +33,8 @@ session_start();
                     <h3>Agregar producto</h3>
                 </caption>
                 <tbody>
-                    <form method="POST" action="../funciones/registrar.php?elemento=producto" onsubmit="return validar_longitud3('id') && validar_longitud40('nombre') && validar_longitud100('descripcion') && validar_longitud30('imagen')&& validar_combos('tipo')&&validar_combos('subcategoria')">
-                        <tr id="tabla-encabezado"">
+                    <form method="POST" action="../funciones/registrar.php?elemento=producto" onsubmit="return validar_combos('categoria') && validar_combos('coleccion') && validar_longitud3('id') && validar_longitud40('nombre') && validar_longitud100('descripcion') && validar_longitud30('imagen')">
+                        <tr id="tabla-encabezado">
                             <td colspan=" 2" align="center">
                             <img src="../static/imagenes/slider2.jpg" width="300px" class="img-prod">
                             </td>
@@ -68,7 +68,7 @@ session_start();
                                 Valor de venta:*
                             </td>
                             <td>
-                                <input type="number" name="costo" id="costo" title="costo" onclick="noNegativo('valor')" onkeypress="return valida_numeros(event)" required placeholder="Escriba el valor de venta" />
+                                <input type="number" name="costo" id="costo" title="costo" onclick="noNegativo('costo')"  onkeypress=" noNegativo('costo') && return valida_numeros(event)"  required placeholder="Escriba el valor de venta" />
                             </td>
                         </tr>
                         <tr>

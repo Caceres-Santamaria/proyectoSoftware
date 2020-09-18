@@ -138,7 +138,7 @@ $tallas = $objMetodo->getTallas($cod);
                         </div>
                         <span id="cantidadC" for="cantidad">Cantidad: </span>
                         <form action="" method="post">
-                            <input type="number" min="1" onblur="maximacantidad(<?php echo $existencia; ?>)" value="1" name="cantidad" id="cantidadB">
+                            <input type="number" name="cantidad" id="cantidadB" min="1" onblur="noNegativo('cantidadB') && maximacantidad(<?php echo $existencia; ?>)" value="1" onclick="noNegativo('cantidadB')">
                             <input type="hidden" id="codigo" name="codigo" value="<?php echo $cod; ?>">
                             <select name="talla" id="talla" class="hidden" name="talla">
                                 <?php

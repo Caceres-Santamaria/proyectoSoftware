@@ -1,9 +1,4 @@
 <header class="header">
-            <div class="menu-movil">
-                <button class="menu-boton">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
             <div class="logo-flamma">
                 <a href="#home" class="logo">
                     <h1>flamma</h1>
@@ -40,6 +35,8 @@
                         <li class="has-sub cateoria"><a href="pedidos.php"><span>Pedidos no enviados</span></a></li>
                         <li class="has-sub cateoria"><a href="TodosPedidos.php"><span>Todos los pedidos</span></a></li>
                         </ul>
+                    </li>
+                    <li class="list-item"><a href="nosotrosA.php"><span>About us</span></a>
                     </li>
                 </ul>
             </nav>

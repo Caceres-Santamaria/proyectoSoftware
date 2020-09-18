@@ -30,22 +30,22 @@ $sub = $_REQUEST['sub']
         <section class=" text-center padin-section">
             <div class="row justify-content-md-center align-items-center ">
                 <div class="col-sm-12 align-self-center ">
-                    <form action="../funciones/pedido.php" class="confirmaPedido" id="frm" method="post">
+                    <form action="../funciones/pedido.php" class="confirmaPedido" id="frm" method="post" onsubmit="return validar_combos('departamento') && validar_combos('ciudad')">
                         <h1 id="iniciar">Confirmación de pedido</h1>
                         <div class="txtb ">
                             <img class="img" src="../static/icons/icons/ubicacion.png" width="30" height="30">
                             <br>
                             <div class="elemento">
                                 <label for="persona">Nombres y apellidos</label>
-                                <input type="text" name="persona" id="persona" title="nombre" onkeypress="return validar_textopersona(event) && validar_longitud40('persona')">
+                                <input type="text" name="persona" id="persona" title="nombre" onkeypress="return validar_textopersona(event) && validar_longitud40('persona')" required>
                             </div>
                             <div class="elemento">
                                 <label for="telefono">Teléfono</label>
-                                <input type="text" name="telefono" id="telefono" onkeypress="return validar_numeros(event)">
+                                <input type="text" name="telefono" id="telefono" onkeypress="return validar_numeros(event) " required>
                             </div>
                             <div class="elemento">
                                 <label for="direccion">Dirección</label>
-                                <input type="text" name="direccion" id="direccion">
+                                <input type="text" name="direccion" id="direccion" required>
                             </div>
                             <div class="elemento">
                                 <label for="especificacion">Especificación</label>
@@ -53,10 +53,10 @@ $sub = $_REQUEST['sub']
                             </div>
                             <div class="elemento">
                                 <label for="departamento">Departamento</label>
-                                <select id="departamento" name="departamento">
+                                <select name="departamento" id="departamento" title="departamento">
                                     <?php
                                     $list = $objMetodo->ListaDepartamentos();
-                                    echo "<option value='0'>---</option>";
+                                    echo "<option value='vacio'>...</option>";
                                     foreach ($list as $row) {
                                         echo '<option value=' . $row[0] . '>' . $row[1] . '</option>';
                                     }
@@ -65,8 +65,8 @@ $sub = $_REQUEST['sub']
                             </div>
                             <div class="elemento">
                                 <label for="ciudad">Ciudad</label>
-                                <select id="ciudad" name="ciudad">
-                                    <option value='0'>---</option>
+                                <select name="ciudad" id="ciudad" title="ciudad">
+                                    <option value="vacio">...</option>
                                 </select>
                             </div>
                         </div>

@@ -119,12 +119,12 @@ elseif($id==4)
     $departamento = $_POST['departamento'];
     if($departamento == 0)
     {
-        echo "<option value='0'>---</option>";
+        echo "<option value='vacio'>...</option>";
     }
     else
     {
         $listaCiudad = $objMetodo->getCiudadDepartamento($departamento);
-        echo "<option value='0'>---</option>";
+        echo "<option value='vacio'>...</option>";
         foreach ($listaCiudad as $row) {
             echo '<option value=' . $row[0] . '>' . $row[2] . '</option>';
         }
