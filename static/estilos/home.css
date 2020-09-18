@@ -381,15 +381,17 @@
         width: 100%;
         border-radius: .5rem;
     }
+    
     .imgcat {
         position: relative;
         width: 20rem;
         height: 20rem;
     }
+    
     .imgcat a {
         color: #fff;
-    }    
-
+    }
+    
     .overlay {
         position: absolute;
         bottom: 0;
@@ -401,6 +403,7 @@
         height: 100%;
         transition: .5s ease;
     }
+    
     .text {
         font-weight: 700;
         font-size: 1.2em;
@@ -416,6 +419,7 @@
         text-shadow: .1px .1px .1px #262626;
         letter-spacing: .3em;
     }
+    
     .containerOverlay {
         width: 100%;
         float: left;
@@ -425,17 +429,17 @@
         width: 100%;
         left: 0;
     }
-    .overlay:hover{
+    
+    .overlay:hover {
         background-color: rgba(58, 54, 50, 0.7);
     }
-
     /*---------footer--------------*/
     
     .contenedor .footer {
         grid-area: footer;
         display: grid;
         grid-template-columns: repeat(2, 1fr) .7fr;
-        grid-template-rows:auto auto auto auto 2em;
+        grid-template-rows: auto auto auto auto 2em;
         grid-template-areas: "banner banner banner" " horario nosotros img" "pago pago pago" "redes redes redes" "derechos derechos derechos";
         grid-gap: 1em;
         background: #000;
@@ -443,18 +447,19 @@
         color: #FFF;
         padding-bottom: 0;
     }
-    .footer > div{
+    
+    .footer>div {
         display: flex;
         justify-content: center;
         align-items: left;
         align-content: left;
     }
+    
     .footer .banner {
         grid-area: banner;
         color: #fff;
         font-size: 1.5em;
         font-family: gothiceregular, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-        
     }
     
     .footer h2 {
@@ -485,7 +490,8 @@
         grid-area: nosotros;
         flex-direction: column;
     }
-    .footer .nosotros p{
+    
+    .footer .nosotros p {
         justify-content: left;
     }
     
@@ -672,8 +678,7 @@
         }
         /*---------content--------------*/
         /*---------footer--------------*/
-
-        .contenedor .banner p{
+        .contenedor .banner p {
             font-family: 'gothiceregular';
         }
         .contenedor .footer {
@@ -722,3 +727,14 @@
     /* Extra large devices (large desktops, 1200px and up) */
     
     @media (min-width: 1200px) {}
+    
+    .padidos {
+        width: 100%;
+        overflow-x: scroll;
+    }
+    
+    .pedidos tabla {
+        max-width: 100vw;
+        max-height: 300px;
+        overflow: scroll;
+    }
