@@ -20,8 +20,12 @@ switch ($elemento) {
     case 'talla':
         $sql = "delete from talla where id_talla=$id";
         break;
+    case 'imagen':
+        $prod = $_REQUEST['id'];
+        $img = $_REQUEST['imagen'];
+        $sql = "delete from imagen_producto where nombre='$img' and producto='$prod'";
+        break;
 }
 
 $obj->Actualizar($sql);
 header("location: ../VistasA/$pagina");
-

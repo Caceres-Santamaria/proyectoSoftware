@@ -3,10 +3,7 @@ include "./Metodos.php";
 $obj = new Metodos();
 extract($_POST);
 $id = $_REQUEST['elemento'];
-echo $id;
-echo $nombre;
-echo $imagen;
-echo $fecha;
+
 //echo $referencia.' '.$nombre.' '.$costo.' '.$descripcion.' '.$categoria.' '.$coleccion;
 
 switch($id)
@@ -55,5 +52,14 @@ switch($id)
         //echo '<br>'.$sql;
         $obj->Actualizar($sql);
         header("location: ../VistasA/pedidos.php");
+    break;
+    case 'imagenes':
+        $prod=$_REQUEST['prod'];
+        $img=$_REQUEST['img'];
+        $valor=$_REQUEST['valor'];
+        $sql="update imagen_producto set nombre='$valor' where nombre = '$img' and producto='$prod'";
+        //echo '<br>'.$sql;
+        $obj->Actualizar($sql);
+        header("location: ../VistasA/imagenesProducto.php?id=".$prod);
     break;
 }

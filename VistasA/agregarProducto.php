@@ -73,6 +73,23 @@ session_start();
                         </tr>
                         <tr>
                             <td>
+                                Talla:*
+                            </td>
+                            <td>
+                                <select name="talla" id="talla" title="talla">
+                                    <option value="vacio">...</option>
+                                    <?PHP
+                                    $sql = "select * from talla";
+                                    $list = $obj->Consulta($sql);
+                                    foreach ($list as $row) {
+                                        echo "<option value='$row[0]'>$row[1]</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 Categoría:*
                             </td>
                             <td>

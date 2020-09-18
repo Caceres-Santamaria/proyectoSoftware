@@ -35,6 +35,8 @@ switch($id)
     case 'producto':
         $sql="insert into producto values ('$referencia','$nombre',$costo,'$descripcion',$categoria,$coleccion)";
         $obj->Actualizar($sql);
+        $sql="insert into talla_producto values ('$referencia','$talla',0)";
+        $obj->Actualizar($sql);
         header("location: ../VistasA/agregarProducto.php");
     break;
     case 'talla':
@@ -44,6 +46,11 @@ switch($id)
         $sql="insert into talla values ($valor,'$talla')";
         $obj->Actualizar($sql);
         header("location: ../VistasA/tallaProducto.php");
+    break;
+    case 'imagen':
+        $sql="insert into imagen_producto values ('$nombre','$referencia')";
+        $obj->Actualizar($sql);
+        header("location: ../VistasA/imagenesProducto.php?id=".$referencia);
     break;
 
 }

@@ -231,11 +231,6 @@ function noNegativo(nom) {
     }
 }
 
-function elimina(id, pagina, cod) {
-    location.href = "../funciones/elimina.php?id=" + id + "&pagina=" + pagina + "&cod=" + cod;
-
-}
-
 function modifica(id, pagina, cod) {
     location.href = "../VistasA/modifica.php?id=" + id + "&pagina=" + pagina + "&cod=" + cod;
 }
@@ -250,6 +245,13 @@ function modificaT(id, talla) {
 function modificaIMG(id) {
     location.href = "./imagenesProducto.php?id=" + id;
 
+}
+modificaIM('<?php echo $row ?>', 'imagen<?php echo $c; ?>')
+
+function modificaIM(id, cod, img) {
+    var valor = document.getElementById(cod).value;
+    //console.log(valor);
+    location.href = "../funciones/actualizar.php?elemento=imagenes&prod=" + id + "&img=" + img + "&valor=" + valor;
 }
 
 function retro(pagina) {
@@ -277,4 +279,8 @@ function maximacantidad(cantidad) {
 
 function elimina(id, elemento, pagina) {
     location.href = "../funciones/elimina.php?elemento=" + elemento + "&id=" + id + "&pagina=" + pagina;
+}
+
+function eliminaIMG(id, imagen) {
+    location.href = "../funciones/elimina.php?elemento=imagen&id=" + id + "&pagina=imagenesProducto.php?id=" + id + "&imagen=" + imagen;
 }
