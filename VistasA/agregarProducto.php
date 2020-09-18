@@ -34,7 +34,7 @@ session_start();
                 </caption>
                 <tbody>
                     <form method="POST" action="../funciones/registrar.php?elemento=producto" onsubmit="return validar_longitud3('id') && validar_longitud40('nombre') && validar_longitud100('descripcion') && validar_longitud30('imagen')&& validar_combos('tipo')&&validar_combos('subcategoria')">
-                        <tr id="tabla-encabezado"">
+                        <tr id="tabla-encabezado">
                             <td colspan=" 2" align="center">
                             <img src="../static/imagenes/slider2.jpg" width="300px" class="img-prod">
                             </td>
