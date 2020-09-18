@@ -69,7 +69,7 @@ session_start();
                     <a href="agregarCiudad.php">
                         <div class="overlay">
                             <div class="text">
-                                <p>Agregar ciudad</p>
+                                <p>Cupones</p>
                             </div>
                         </div><!-- overlay -->
                     </a>

@@ -5760,12 +5760,7 @@ input[type="button"].btn-block {
     flex: 1 1 auto;
     min-height: 1px;
     padding: 1.25rem;
-    align-content: center !important;
-    justify-content: center !important;
-    justify-items: center !important;
-    text-align: center !important;
-    align-items: center !important;
-    margin: auto !important;
+  
 }
 .catalogo{
     align-content: center !important;

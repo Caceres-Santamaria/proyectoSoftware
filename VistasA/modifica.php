@@ -226,7 +226,7 @@ $obj = new Metodos();
                                         Valor de venta:*
                                     </td>
                                     <td>
-                                        <input type="number" name="costo" id="costo" title="costo" onclick="noNegativo('valor')" onkeypress="return valida_numeros(event)" required placeholder="Escriba el valor de venta" value="<?php echo $row[2]; ?>" />
+                                        <input type="number" name="costo" id="costo" title="costo" onclick="noNegativo('costo')" onblur="noNegativo('costo')" onkeypress="return valida_numeros(event)" required placeholder="Escriba el valor de venta" value="<?php echo $row[2]; ?>" />
                                     </td>
                                 </tr>
                                 <tr>
