@@ -36,7 +36,7 @@ session_start();
                     <form method="POST" action="../funciones/registrar.php?elemento=producto" onsubmit="return validar_combos('categoria') && validar_combos('coleccion') && validar_longitud3('id') && validar_longitud40('nombre') && validar_longitud100('descripcion') && validar_longitud30('imagen')">
                         <tr id="tabla-encabezado">
                             <td colspan=" 2" align="center">
-                            <img src="../static/imagenes/slider2.jpg" width="300px" class="img-prod">
+                                <img src="../static/imagenes/slider2.jpg" width="200px" class="img-prod">
                             </td>
                         </tr>
                         <tr>
@@ -52,7 +52,7 @@ session_start();
                                 Nombre:*
                             </td>
                             <td>
-                                <input type="text" name="nombre" id="nombre" title="nombre" onblur=" minuscula('nombre')" onkeypress="return validar_texto(event)" required placeholder="Escriba nombre del producto" />
+                                <input type="text" name="nombre" id="nombre" title="nombre"  required placeholder="Escriba nombre del producto" />
                             </td>
                         </tr>
                         <tr>
@@ -60,7 +60,7 @@ session_start();
                                 Descripcion del producto:*
                             </td>
                             <td>
-                                <textarea name="descripcion" id=descripcion title="descripcion" required placeholder="Escriba la descripcion del producto"   rows="30"></textarea>
+                                <textarea name="descripcion" id=descripcion title="descripcion" required placeholder="Escriba la descripcion del producto" rows="30"></textarea>
                             </td>
                         </tr>
                         <tr>
@@ -68,7 +68,7 @@ session_start();
                                 Valor de venta:*
                             </td>
                             <td>
-                                <input type="number" name="costo" id="costo" title="costo" onclick="noNegativo('costo')"  onkeypress=" noNegativo('costo') && return valida_numeros(event)"  required placeholder="Escriba el valor de venta" />
+                                <input type="number" name="costo" id="costo" title="costo" onclick="noNegativo('costo')" onkeypress=" noNegativo('costo') && return valida_numeros(event)" required placeholder="Escriba el valor de venta" />
                             </td>
                         </tr>
                         <tr>
